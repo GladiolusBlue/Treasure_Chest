@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://bddnesojb3xex"]
+
+[ext_resource type="Texture2D" uid="uid://cgpd5oj0bci7n" path="res://Dice_sprites/Enemy/image4545.png" id="1_15bw1"]
+[ext_resource type="Texture2D" uid="uid://84w0c8r8tnba" path="res://Dice_sprites/Enemy/image4589.png" id="2_81xrr"]
+[ext_resource type="Texture2D" uid="uid://hae8v0dox1hk" path="res://Dice_sprites/Enemy/image4611.png" id="3_k3i1x"]
+[ext_resource type="Texture2D" uid="uid://b2xs30dwa7qux" path="res://Dice_sprites/Enemy/image4622.png" id="4_itvbi"]
+[ext_resource type="Texture2D" uid="uid://c670nrybtt3cs" path="res://Dice_sprites/Enemy/image4666.png" id="5_lwrsv"]
+[ext_resource type="Texture2D" uid="uid://byv63cwkivce6" path="res://Dice_sprites/Enemy/image4823.png" id="6_huw68"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_autnt"]
+size = Vector2(578, 568)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(-5, -4)
+shape = SubResource("RectangleShape2D_autnt")
+
+[node name="Image4545" type="Sprite2D" parent="."]
+position = Vector2(-6, -5)
+texture = ExtResource("1_15bw1")
+
+[node name="Image4589" type="Sprite2D" parent="."]
+position = Vector2(-6, -5)
+texture = ExtResource("2_81xrr")
+
+[node name="Image4611" type="Sprite2D" parent="."]
+position = Vector2(-6, -5)
+rotation = 0.0563472
+texture = ExtResource("3_k3i1x")
+
+[node name="Image4622" type="Sprite2D" parent="."]
+position = Vector2(-6, -5)
+scale = Vector2(0.88, 0.88)
+texture = ExtResource("4_itvbi")
+
+[node name="Image4666" type="Sprite2D" parent="."]
+position = Vector2(-6, -5)
+rotation = 0.0415956
+texture = ExtResource("5_lwrsv")
+
+[node name="Image4823" type="Sprite2D" parent="."]
+position = Vector2(-6, -5)
+rotation = -0.0854229
+texture = ExtResource("6_huw68")

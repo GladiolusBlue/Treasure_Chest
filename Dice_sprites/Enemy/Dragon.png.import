@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c670nrybtt3cs"
-path="res://.godot/imported/image4666.png-339460b2b58f1a0d8ce1dc62716c13ee.ctex"
+uid="uid://84w0c8r8tnba"
+path="res://.godot/imported/Dragon.png-db28338b8ef80a6f4356d245fb237608.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dice_sprites/Enemy/image4666.png"
-dest_files=["res://.godot/imported/image4666.png-339460b2b58f1a0d8ce1dc62716c13ee.ctex"]
+source_file="res://Dice_sprites/Enemy/Dragon.png"
+dest_files=["res://.godot/imported/Dragon.png-db28338b8ef80a6f4356d245fb237608.ctex"]
 
 [params]
 

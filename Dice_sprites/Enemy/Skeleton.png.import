@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hae8v0dox1hk"
-path="res://.godot/imported/image4611.png-8ccd3b97f3a9cd4b90328f021f01aa37.ctex"
+uid="uid://c670nrybtt3cs"
+path="res://.godot/imported/Skeleton.png-05b8765d1018e1349f5fc905a0251362.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dice_sprites/Enemy/image4611.png"
-dest_files=["res://.godot/imported/image4611.png-8ccd3b97f3a9cd4b90328f021f01aa37.ctex"]
+source_file="res://Dice_sprites/Enemy/Skeleton.png"
+dest_files=["res://.godot/imported/Skeleton.png-05b8765d1018e1349f5fc905a0251362.ctex"]
 
 [params]
 

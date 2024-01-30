@@ -1,68 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://bddnesojb3xex"]
+[gd_scene load_steps=4 format=3 uid="uid://bddnesojb3xex"]
 
-[ext_resource type="Script" path="res://Scripts/Dice_enemy.gd" id="1_xpaur"]
-[ext_resource type="Texture2D" uid="uid://cgpd5oj0bci7n" path="res://Dice_sprites/Enemy/Chest.png" id="2_c51jn"]
-[ext_resource type="Texture2D" uid="uid://84w0c8r8tnba" path="res://Dice_sprites/Enemy/Dragon.png" id="3_lg0op"]
-[ext_resource type="Texture2D" uid="uid://hae8v0dox1hk" path="res://Dice_sprites/Enemy/Slime.png" id="4_chpxu"]
-[ext_resource type="Texture2D" uid="uid://b2xs30dwa7qux" path="res://Dice_sprites/Enemy/Goblin.png" id="5_o52d7"]
-[ext_resource type="Texture2D" uid="uid://c670nrybtt3cs" path="res://Dice_sprites/Enemy/Skeleton.png" id="6_lhcgs"]
-[ext_resource type="Texture2D" uid="uid://byv63cwkivce6" path="res://Dice_sprites/Enemy/Potion.png" id="7_o1lae"]
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_6whgq"]
+[ext_resource type="PackedScene" uid="uid://b6e5swb7oa78b" path="res://Scenes/dice.tscn" id="3_s1oxe"]
 [ext_resource type="Texture2D" uid="uid://blhmd5qdxkop7" path="res://icon.svg" id="8_jbi46"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_autnt"]
-size = Vector2(578, 568)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yuuf3"]
 
 [node name="Node2D" type="Node2D"]
 scale = Vector2(0.355, 0.355)
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(-5, -4)
-shape = SubResource("RectangleShape2D_autnt")
-
-[node name="Chest" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-6, -5)
-texture = ExtResource("2_c51jn")
-
-[node name="Dragon" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-6, -5)
-texture = ExtResource("3_lg0op")
-
-[node name="Slime" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-6, -5)
-rotation = 0.0563472
-texture = ExtResource("4_chpxu")
-
-[node name="Goblin" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-6, -5)
-scale = Vector2(0.88, 0.88)
-texture = ExtResource("5_o52d7")
-
-[node name="Skeleton" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-6, -5)
-rotation = 0.0415956
-texture = ExtResource("6_lhcgs")
-
-[node name="Potion" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-6, -5)
-rotation = -0.0854229
-texture = ExtResource("7_o1lae")
-
-[node name="Dice_main" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-texture = SubResource("CompressedTexture2D_yuuf3")
-script = ExtResource("1_xpaur")
-
-[node name="Sprite2D" type="Sprite2D" parent="Dice_main"]
+script = ExtResource("1_6whgq")
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -79,4 +23,9 @@ position = Vector2(149.296, 154.93)
 scale = Vector2(2.46479, 2.35211)
 texture = ExtResource("8_jbi46")
 
-[connection signal="pressed" from="Node2D/Button1" to="Dice_main" method="_on_Button1_pressed"]
+[node name="Dice" parent="." instance=ExtResource("3_s1oxe")]
+
+[node name="Dice2" parent="." instance=ExtResource("3_s1oxe")]
+position = Vector2(754.93, 0)
+
+[connection signal="pressed" from="Node2D/Button1" to="." method="_on_button_1_pressed"]

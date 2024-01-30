@@ -22,7 +22,7 @@ func _ready():
 	
 
 
-func _on_Button1_pressed():
+func fall_dice(): #падение кубика
 	# выбор рандомного числа от 1 до 6
 	var random_number = randi() % 6 + 1
 	

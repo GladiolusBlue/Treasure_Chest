@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6e5swb7oa78b"]
+
+[ext_resource type="Texture2D" uid="uid://cgpd5oj0bci7n" path="res://Dice_sprites/Enemy/Chest.png" id="1_ym0k4"]
+[ext_resource type="Texture2D" uid="uid://84w0c8r8tnba" path="res://Dice_sprites/Enemy/Dragon.png" id="2_84b85"]
+[ext_resource type="Texture2D" uid="uid://hae8v0dox1hk" path="res://Dice_sprites/Enemy/Slime.png" id="3_2asq2"]
+[ext_resource type="Texture2D" uid="uid://b2xs30dwa7qux" path="res://Dice_sprites/Enemy/Goblin.png" id="4_4qq8p"]
+[ext_resource type="Texture2D" uid="uid://c670nrybtt3cs" path="res://Dice_sprites/Enemy/Skeleton.png" id="5_uw0er"]
+[ext_resource type="Texture2D" uid="uid://byv63cwkivce6" path="res://Dice_sprites/Enemy/Potion.png" id="6_es1fi"]
+[ext_resource type="Script" path="res://Scripts/Dice_enemy.gd" id="7_m405a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_autnt"]
+size = Vector2(578, 568)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yuuf3"]
+
+[node name="Dice" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(-5, -4)
+shape = SubResource("RectangleShape2D_autnt")
+
+[node name="Chest" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-6, -5)
+texture = ExtResource("1_ym0k4")
+
+[node name="Dragon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-6, -5)
+texture = ExtResource("2_84b85")
+
+[node name="Slime" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-6, -5)
+rotation = 0.0563472
+texture = ExtResource("3_2asq2")
+
+[node name="Goblin" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-6, -5)
+scale = Vector2(0.88, 0.88)
+texture = ExtResource("4_4qq8p")
+
+[node name="Skeleton" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-6, -5)
+rotation = 0.0415956
+texture = ExtResource("5_uw0er")
+
+[node name="Potion" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-6, -5)
+rotation = -0.0854229
+texture = ExtResource("6_es1fi")
+
+[node name="Dice_main" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(1, 1.36)
+texture = SubResource("CompressedTexture2D_yuuf3")
+script = ExtResource("7_m405a")
+
+[node name="Sprite2D" type="Sprite2D" parent="Dice_main"]

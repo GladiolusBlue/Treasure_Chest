@@ -24,8 +24,12 @@ scale = Vector2(2.46479, 2.35211)
 texture = ExtResource("8_jbi46")
 
 [node name="Dice" parent="." instance=ExtResource("3_s1oxe")]
+metadata/_edit_group_ = true
 
 [node name="Dice2" parent="." instance=ExtResource("3_s1oxe")]
 position = Vector2(754.93, 0)
+metadata/_edit_group_ = true
 
 [connection signal="pressed" from="Node2D/Button1" to="." method="_on_button_1_pressed"]
+
+[editable path="Dice"]

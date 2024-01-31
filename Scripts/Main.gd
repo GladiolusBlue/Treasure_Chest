@@ -5,8 +5,8 @@ var g = 0
 var c = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#опрос сигнала от кубов о готовности
 	$Dice_e1/Dice_main.cubu_gotov.connect(self.next1)
-	gotov += 1
 	$Dice_e2/Dice_main.cubu_gotov.connect(self.next1)
 	$Dice_p1/Dice_main.cubu_gotov.connect(self.next1)
 	$Dice_p2/Dice_main.cubu_gotov.connect(self.next1)
@@ -18,6 +18,7 @@ func _process(delta):
 
 
 func _on_button_1_pressed():
+	gotov = 0
 	$Dice_e1/Dice_main.fall_dice()
 	#if $Dice_e1/Dice_main.readi1():
 	#$Dice_e2/Dice_main.fall_dice()
@@ -25,16 +26,18 @@ func _on_button_1_pressed():
 	#$Dice_p2/Dice_main.fall_dice()
 	#print(gotov,  cube,  g,  c)
 
+# запуск следующего куба по готовности
 func next1(x,y):
+	gotov += 1
 	if gotov == 1:
 		$Dice_e2/Dice_main.fall_dice()
-		gotov += 1
+		#gotov += 1
 	elif gotov == 2:
 		$Dice_p1/Dice_main.fall_dice()
-		gotov += 1
+		#gotov += 1
 	elif gotov == 3:
 		$Dice_p2/Dice_main.fall_dice()
-		gotov += 1
+		#gotov += 1
 	else :
 		#$Dice_p2/Dice_main.fall_dice()
 		print("test1","-",x,"-",y,"-",gotov)

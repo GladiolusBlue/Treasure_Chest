@@ -10,19 +10,19 @@ scale = Vector2(0.355, 0.355)
 script = ExtResource("1_h2vby")
 
 [node name="Node2D" type="Node2D" parent="."]
-
-[node name="Camera2D" type="Camera2D" parent="Node2D"]
+position = Vector2(-1295.77, 0)
 
 [node name="Button1" type="Button" parent="Node2D"]
-offset_left = -1191.55
-offset_top = 363.38
-offset_right = -884.549
-offset_bottom = 664.38
+offset_left = -149.296
+offset_top = -149.296
+offset_right = 134.704
+offset_bottom = 132.704
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D/Button1"]
-position = Vector2(149.296, 154.93)
+position = Vector2(149.296, 140.845)
 scale = Vector2(2.46479, 2.35211)
 texture = ExtResource("2_yddrg")
+metadata/_edit_group_ = true
 
 [node name="Dice_e1" parent="." instance=ExtResource("3_0tr2e")]
 position = Vector2(19.7183, 543.662)
@@ -39,5 +39,8 @@ scale = Vector2(0.5, 0.5)
 [node name="Dice_p2" parent="." instance=ExtResource("4_gmop2")]
 position = Vector2(791.549, -549.296)
 scale = Vector2(0.5, 0.5)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -14.0845)
 
 [connection signal="pressed" from="Node2D/Button1" to="." method="_on_button_1_pressed"]

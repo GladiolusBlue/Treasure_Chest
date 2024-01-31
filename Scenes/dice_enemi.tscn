@@ -52,7 +52,6 @@ func fall_dice(): #падение кубика
 	count = random_number
 	_on_timer_busting_timeout()
 	cube_face = random_number
-	#print(readi1)
 	
 func busting_the_dice(i):
 	# показ картинок граней
@@ -83,7 +82,6 @@ func busting_the_dice(i):
 		image = image6
 	else:
 		print(\"error\",random_number)
-		#var counter = 0
 	# установка выбранной картинки видимой
 	$Sprite2D.texture = image
 	# выбор соответствующей картинки
@@ -100,16 +98,13 @@ func _on_timer_busting_timeout():
 		count += 1
 		# запуск показа картинок граней
 		busting_the_dice(count)
-		#print(counter)
 	else :
 		# остановка таймера и переборки картинок
 		gotov = 1
-		#print(\"stop\", counter, count, \"--\", znachenie )
 		counter = 0
 		$Timer_busting.stop()
+		# передача сигнала о готовности куба и его значение
 		emit_signal(\"cubu_gotov\",cube_face,gotov)
-
-
 "
 
 [node name="Dice" type="Node2D"]

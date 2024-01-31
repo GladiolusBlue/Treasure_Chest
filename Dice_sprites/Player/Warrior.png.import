@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnjs2xltad4v7"
-path="res://.godot/imported/image845.png-71ceab175e1a9ee404ea926c5f36efcb.ctex"
+uid="uid://bes0ui5q22fpf"
+path="res://.godot/imported/Warrior.png-0320505617e4d7f89b070115efb65156.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dice_sprites/Player/image845.png"
-dest_files=["res://.godot/imported/image845.png-71ceab175e1a9ee404ea926c5f36efcb.ctex"]
+source_file="res://Dice_sprites/Player/Warrior.png"
+dest_files=["res://.godot/imported/Warrior.png-0320505617e4d7f89b070115efb65156.ctex"]
 
 [params]
 

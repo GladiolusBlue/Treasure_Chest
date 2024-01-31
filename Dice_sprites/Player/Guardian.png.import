@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cp40q8c3o4oym"
-path="res://.godot/imported/image467.png-194647855c39dfa95dd7416bc9ab4a5e.ctex"
+uid="uid://di0h5yilh6h8b"
+path="res://.godot/imported/Guardian.png-efb7f0a690f5fca3226fe37413dfe20c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dice_sprites/Player/image467.png"
-dest_files=["res://.godot/imported/image467.png-194647855c39dfa95dd7416bc9ab4a5e.ctex"]
+source_file="res://Dice_sprites/Player/Guardian.png"
+dest_files=["res://.godot/imported/Guardian.png-efb7f0a690f5fca3226fe37413dfe20c.ctex"]
 
 [params]
 

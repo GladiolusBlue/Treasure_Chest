@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6e5swb7oa78b"]
+[gd_scene load_steps=10 format=3 uid="uid://b5quk5jybqi1m"]
 
-[ext_resource type="Texture2D" uid="uid://cgpd5oj0bci7n" path="res://Dice_sprites/Enemy/Chest.png" id="1_ym0k4"]
-[ext_resource type="Texture2D" uid="uid://84w0c8r8tnba" path="res://Dice_sprites/Enemy/Dragon.png" id="2_84b85"]
-[ext_resource type="Texture2D" uid="uid://hae8v0dox1hk" path="res://Dice_sprites/Enemy/Slime.png" id="3_2asq2"]
-[ext_resource type="Texture2D" uid="uid://b2xs30dwa7qux" path="res://Dice_sprites/Enemy/Goblin.png" id="4_4qq8p"]
-[ext_resource type="Texture2D" uid="uid://c670nrybtt3cs" path="res://Dice_sprites/Enemy/Skeleton.png" id="5_uw0er"]
-[ext_resource type="Texture2D" uid="uid://byv63cwkivce6" path="res://Dice_sprites/Enemy/Potion.png" id="6_es1fi"]
+[ext_resource type="Texture2D" uid="uid://cgpd5oj0bci7n" path="res://Dice_sprites/Enemy/Chest.png" id="1_c6eng"]
+[ext_resource type="Texture2D" uid="uid://84w0c8r8tnba" path="res://Dice_sprites/Enemy/Dragon.png" id="2_0oesl"]
+[ext_resource type="Texture2D" uid="uid://hae8v0dox1hk" path="res://Dice_sprites/Enemy/Slime.png" id="3_781aj"]
+[ext_resource type="Texture2D" uid="uid://b2xs30dwa7qux" path="res://Dice_sprites/Enemy/Goblin.png" id="4_4yd5k"]
+[ext_resource type="Texture2D" uid="uid://c670nrybtt3cs" path="res://Dice_sprites/Enemy/Skeleton.png" id="5_fftw7"]
+[ext_resource type="Texture2D" uid="uid://byv63cwkivce6" path="res://Dice_sprites/Enemy/Potion.png" id="6_vn40s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_autnt"]
 size = Vector2(578, 568)
@@ -25,31 +25,35 @@ var Dice_main: Node2D
 var image: CompressedTexture2D
 var count = 0
 var counter = 0
+var cube_face = 0 #номер изабражения грани кубика для передачи дальше
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	image1 = load(\"res://Dice_sprites/Enemy/Chest.png\")
-	image2 = load(\"res://Dice_sprites/Enemy/Dragon.png\")
-	image3 = load(\"res://Dice_sprites/Enemy/Goblin.png\")
-	image4 = load(\"res://Dice_sprites/Enemy/Potion.png\")
-	image5 = load(\"res://Dice_sprites/Enemy/Skeleton.png\")
-	image6 = load(\"res://Dice_sprites/Enemy/Slime.png\")
+	image1 = load(\"res://Dice_sprites/Player/Cleric.png\")
+	image2 = load(\"res://Dice_sprites/Player/Guardian.png\")
+	image3 = load(\"res://Dice_sprites/Player/Magician.png\")
+	image4 = load(\"res://Dice_sprites/Player/Scroll.png\")
+	image5 = load(\"res://Dice_sprites/Player/Thief.png\")
+	image6 = load(\"res://Dice_sprites/Player/Warrior.png\")
 	
 	# загрузка текстур картинок
 	
 
 
 func fall_dice(): #падение кубика
-	
+	# время задержки для показывания картинки при перелистывании
 	$Timer_busting.start(0.2)
 	# выбор рандомного числа от 1 до 6
 	var random_number = randi() % 6 + 1
 	count = random_number
 	_on_timer_busting_timeout()
+	cube_face = random_number
+	
 	
 	
 func busting_the_dice(i):
+	# показ картинок граней
 	var random_number = i
 	if random_number == 1:
 		image = image1
@@ -76,8 +80,8 @@ func busting_the_dice(i):
 	elif random_number == 12:
 		image = image6
 	else:
-		print(\"coustop\",random_number)
-		var counter = 0
+		print(\"error\",random_number)
+		#var counter = 0
 	# установка выбранной картинки видимой
 	$Sprite2D.texture = image
 	# выбор соответствующей картинки
@@ -88,16 +92,16 @@ func _process(delta):
 
 
 func _on_timer_busting_timeout():
-	if counter < 7:
+	# циклическая переборка картинок и их показ
+	if counter < 6:
 		counter += 1
 		count += 1
+		# запуск показа картинок граней
 		busting_the_dice(count)
-		print(counter)
-		print(count)
-		if counter == 8 :
-			counter = 0
+		#print(counter)
 	else :
-		print(\"stop\", counter, count)
+		# остановка таймера и переборки картинок
+		#print(\"stop\", counter, count, \"--\", znachenie )
 		counter = 0
 		$Timer_busting.stop()
 		
@@ -115,29 +119,29 @@ shape = SubResource("RectangleShape2D_autnt")
 
 [node name="Chest" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("1_ym0k4")
+texture = ExtResource("1_c6eng")
 
 [node name="Dragon" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("2_84b85")
+texture = ExtResource("2_0oesl")
 
 [node name="Slime" type="Sprite2D" parent="."]
 visible = false
 rotation = 0.0563472
-texture = ExtResource("3_2asq2")
+texture = ExtResource("3_781aj")
 
 [node name="Goblin" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("4_4qq8p")
+texture = ExtResource("4_4yd5k")
 
 [node name="Skeleton" type="Sprite2D" parent="."]
 visible = false
-texture = ExtResource("5_uw0er")
+texture = ExtResource("5_fftw7")
 
 [node name="Potion" type="Sprite2D" parent="."]
 visible = false
 rotation = -0.0854229
-texture = ExtResource("6_es1fi")
+texture = ExtResource("6_vn40s")
 
 [node name="Dice_main" type="Sprite2D" parent="."]
 unique_name_in_owner = true

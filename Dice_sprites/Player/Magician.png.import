@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bes0ui5q22fpf"
-path="res://.godot/imported/image534.png-7469e55f0fb767da7ca64bf8b6ae7e31.ctex"
+uid="uid://bnjs2xltad4v7"
+path="res://.godot/imported/Magician.png-69792e7ae6754bff432b0ec4d2ce605f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dice_sprites/Player/image534.png"
-dest_files=["res://.godot/imported/image534.png-7469e55f0fb767da7ca64bf8b6ae7e31.ctex"]
+source_file="res://Dice_sprites/Player/Magician.png"
+dest_files=["res://.godot/imported/Magician.png-69792e7ae6754bff432b0ec4d2ce605f.ctex"]
 
 [params]
 

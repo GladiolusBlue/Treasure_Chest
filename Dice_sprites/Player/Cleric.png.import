@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgguto3goxewb"
-path="res://.godot/imported/image834.png-a11a06afc6fc9042a93f8ce136fe121a.ctex"
+uid="uid://chpph8gb205p2"
+path="res://.godot/imported/Cleric.png-1b486f96202999ae97907b3a0d57c15d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dice_sprites/Player/image834.png"
-dest_files=["res://.godot/imported/image834.png-a11a06afc6fc9042a93f8ce136fe121a.ctex"]
+source_file="res://Dice_sprites/Player/Cleric.png"
+dest_files=["res://.godot/imported/Cleric.png-1b486f96202999ae97907b3a0d57c15d.ctex"]
 
 [params]
 

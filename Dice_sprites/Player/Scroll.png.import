@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7t8nvfhq7i8h"
-path="res://.godot/imported/image4512.png-b77fa70863724c52df706d8c9dc6d35b.ctex"
+uid="uid://dgguto3goxewb"
+path="res://.godot/imported/Scroll.png-bc72d5db13b417c4835cb99d74ac1840.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dice_sprites/Player/image4512.png"
-dest_files=["res://.godot/imported/image4512.png-b77fa70863724c52df706d8c9dc6d35b.ctex"]
+source_file="res://Dice_sprites/Player/Scroll.png"
+dest_files=["res://.godot/imported/Scroll.png-bc72d5db13b417c4835cb99d74ac1840.ctex"]
 
 [params]
 

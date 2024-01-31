@@ -14,6 +14,8 @@ func _process(delta):
 
 
 func _on_button_1_pressed():
-	$Dice/Dice_main.fall_dice()
-	$Dice2/Dice_main.fall_dice()
-	pass # Replace with function body.
+	$Dice_e1/Dice_main.fall_dice()
+	$Dice_e2/Dice_main.fall_dice()
+	$Dice_p1/Dice_main.fall_dice()
+	$Dice_p2/Dice_main.fall_dice()
+

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pmu6eiyfm0uh"
-path="res://.godot/imported/image4523.png-777324f4d69ac8f951f99b550c3c9665.ctex"
+uid="uid://cp40q8c3o4oym"
+path="res://.godot/imported/Thief.png-f619fa9e62a57b31eca626dd57b5e250.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dice_sprites/Player/image4523.png"
-dest_files=["res://.godot/imported/image4523.png-777324f4d69ac8f951f99b550c3c9665.ctex"]
+source_file="res://Dice_sprites/Player/Thief.png"
+dest_files=["res://.godot/imported/Thief.png-f619fa9e62a57b31eca626dd57b5e250.ctex"]
 
 [params]
 

@@ -41,12 +41,13 @@ func _ready():
 
 
 func fall_dice(): #падение кубика
-	$Timer_busting.start()
+	
+	$Timer_busting.start(0.2)
 	# выбор рандомного числа от 1 до 6
 	var random_number = randi() % 6 + 1
 	count = random_number
 	_on_timer_busting_timeout()
-	#busting_the_dice(count)
+	
 	
 func busting_the_dice(i):
 	var random_number = i
@@ -62,7 +63,7 @@ func busting_the_dice(i):
 		image = image5
 	elif random_number == 6:
 		image = image6
-	if random_number == 7:
+	elif random_number == 7:
 		image = image1
 	elif random_number == 8:
 		image = image2
@@ -93,10 +94,14 @@ func _on_timer_busting_timeout():
 		busting_the_dice(count)
 		print(counter)
 		print(count)
+		if counter == 8 :
+			counter = 0
 	else :
+		print(\"stop\", counter, count)
+		counter = 0
 		$Timer_busting.stop()
-		var counter = 0
-		print(\"stop\")
+		
+		
 		
 "
 
@@ -142,6 +147,7 @@ script = SubResource("GDScript_f60cv")
 [node name="Sprite2D" type="Sprite2D" parent="Dice_main"]
 
 [node name="Timer_busting" type="Timer" parent="Dice_main"]
+process_mode = 1
 wait_time = 0.2
 
 [connection signal="timeout" from="Dice_main/Timer_busting" to="Dice_main" method="_on_timer_busting_timeout"]

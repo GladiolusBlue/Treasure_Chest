@@ -26,6 +26,8 @@ var image: CompressedTexture2D
 var count = 0
 var counter = 0
 var cube_face = 0 #номер изабражения грани кубика для передачи дальше
+var gotov = 0
+signal cubu_gotov
 
 
 # Called when the node enters the scene tree for the first time.
@@ -101,9 +103,11 @@ func _on_timer_busting_timeout():
 		#print(counter)
 	else :
 		# остановка таймера и переборки картинок
+		gotov = 1
 		#print(\"stop\", counter, count, \"--\", znachenie )
 		counter = 0
 		$Timer_busting.stop()
+		emit_signal(\"cubu_gotov\",cube_face,gotov)
 		
 		
 		

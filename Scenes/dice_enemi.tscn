@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6e5swb7oa78b"]
+[gd_scene load_steps=11 format=3 uid="uid://b6e5swb7oa78b"]
 
+[ext_resource type="Script" path="res://Scripts/dice_enemi.gd" id="1_1dkg8"]
 [ext_resource type="Texture2D" uid="uid://cgpd5oj0bci7n" path="res://Dice_sprites/Enemy/Chest.png" id="1_ym0k4"]
 [ext_resource type="Texture2D" uid="uid://84w0c8r8tnba" path="res://Dice_sprites/Enemy/Dragon.png" id="2_84b85"]
 [ext_resource type="Texture2D" uid="uid://hae8v0dox1hk" path="res://Dice_sprites/Enemy/Slime.png" id="3_2asq2"]
@@ -26,6 +27,8 @@ var image: CompressedTexture2D
 var count = 0
 var counter = 0
 var cube_face = 0 #номер изабражения грани кубика для передачи дальше
+var gotov = 0
+signal cubu_gotov
 
 
 # Called when the node enters the scene tree for the first time.
@@ -43,14 +46,13 @@ func _ready():
 
 func fall_dice(): #падение кубика
 	# время задержки для показывания картинки при перелистывании
-	$Timer_busting.start(0.2)
+	$Timer_busting.start(0.15)
 	# выбор рандомного числа от 1 до 6
 	var random_number = randi() % 6 + 1
 	count = random_number
 	_on_timer_busting_timeout()
 	cube_face = random_number
-	
-	
+	#print(readi1)
 	
 func busting_the_dice(i):
 	# показ картинок граней
@@ -89,7 +91,7 @@ func busting_the_dice(i):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
+	
 
 func _on_timer_busting_timeout():
 	# циклическая переборка картинок и их показ
@@ -101,15 +103,17 @@ func _on_timer_busting_timeout():
 		#print(counter)
 	else :
 		# остановка таймера и переборки картинок
+		gotov = 1
 		#print(\"stop\", counter, count, \"--\", znachenie )
 		counter = 0
 		$Timer_busting.stop()
-		
-		
-		
+		emit_signal(\"cubu_gotov\",cube_face,gotov)
+
+
 "
 
 [node name="Dice" type="Node2D"]
+script = ExtResource("1_1dkg8")
 metadata/_edit_group_ = true
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]

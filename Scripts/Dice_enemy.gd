@@ -17,7 +17,6 @@ func _ready():
 	image4 = load("res://Dice_sprites/Enemy/Potion.png")
 	image5 = load("res://Dice_sprites/Enemy/Skeleton.png")
 	image6 = load("res://Dice_sprites/Enemy/Slime.png")
-	pass # Replace with function body.
 	# загрузка текстур картинок
 	
 
@@ -25,7 +24,7 @@ func _ready():
 func fall_dice(): #падение кубика
 	# выбор рандомного числа от 1 до 6
 	var random_number = randi() % 6 + 1
-	
+	busting_the_dice(random_number)
 	# выбор соответствующей картинки
 	var image: CompressedTexture2D
 	if random_number == 1:
@@ -43,8 +42,29 @@ func fall_dice(): #падение кубика
 	
 	# установка выбранной картинки видимой
 	$Sprite2D.texture = image
-	pass
 	
+func busting_the_dice(i):
+	var image: CompressedTexture2D
+	var count = i+1
+	if count == 1:
+		image = image1
+	elif count == 2:
+		image = image2
+	elif count == 3:
+		image = image3
+	elif count == 4:
+		image = image4
+	elif count == 5:
+		image = image5
+	else:
+		image = image6
+		
+	$Sprite2D.texture = image
+	$Timer_busting
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func _on_timer_busting_timeout():
+	pass # Replace with function body.

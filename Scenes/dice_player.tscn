@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5quk5jybqi1m"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_autnt"]
-size = Vector2(578, 568)
-
 [sub_resource type="GDScript" id="GDScript_f60cv"]
 script/source = "extends Node2D
 
+@export var Scale = Vector2.ONE #экспорт переменной масштаба
+@export var speed = 400
+var Velocity = Vector2.ZERO
 var image1: CompressedTexture2D
 var image2: CompressedTexture2D
 var image3: CompressedTexture2D
@@ -19,61 +19,97 @@ var counter = 0
 var cube_face = 0 #номер изабражения грани кубика для передачи дальше
 var gotov = 0
 signal cubu_gotov
+var scale_minus = 0.9
+ #значение на сколько уменьшать масштаб
+var scale_vozvrat = 1
+var num_revolut = 8 #количество переворотов граней куба
+# Called when the node enters the scene tree for the first time.
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# загрузка текстур картинок
 	image1 = load(\"res://Dice_sprites/Player/Cleric.png\")
 	image2 = load(\"res://Dice_sprites/Player/Guardian.png\")
 	image3 = load(\"res://Dice_sprites/Player/Magician.png\")
 	image4 = load(\"res://Dice_sprites/Player/Scroll.png\")
 	image5 = load(\"res://Dice_sprites/Player/Thief.png\")
 	image6 = load(\"res://Dice_sprites/Player/Warrior.png\")
+	# первоначальная установка масштаба
+	Scale.x = 1.5
+	Scale.y = 1.5
+	apply_scale(Scale)
 	
-	# загрузка текстур картинок
 	
-
-
+func scale_vozv(scale_x):
+	# функция расчета коэффициента возврата масштаба в начальное положение для 
+	# переброски куба
+	#print(scale_x)
+	scale_vozvrat = scale_x*scale_vozvrat
+	
+	
 func fall_dice(): #падение кубика
+	scale_vozvrat = 1/scale_vozvrat
+	Scale.x = scale_vozvrat # Возврат первоначального размера масштаба
+	Scale.y = scale_vozvrat
+	apply_scale(Scale)# установка 100% значения от которого будем уменьшать
+	scale_vozvrat = 1
+	Scale.x = 1
+	Scale.y = 1
 	# время задержки для показывания картинки при перелистывании
-	$Timer_busting.start(0.2)
+	$Timer_busting.start(0.15)
 	# выбор рандомного числа от 1 до 6
 	var random_number = randi() % 6 + 1
 	count = random_number
 	_on_timer_busting_timeout()
-	cube_face = random_number
+	if (random_number+num_revolut)%6 == 0:
+		cube_face = 6
+	else:
+		cube_face = (random_number+num_revolut)%6 
+	
 	
 func busting_the_dice(i):
 	# показ картинок граней
-	var random_number = i
-	if random_number == 1 or random_number == 7:
+	# выбор соответствующей картинки
+	var numb = i
+	var random_number = numb%6
+	if random_number == 1:
 		image = image1
-	elif random_number == 2 or random_number == 8:
+	elif random_number == 2:
 		image = image2
-	elif random_number == 3 or random_number == 9:
+	elif random_number == 3:
 		image = image3
-	elif random_number == 4 or random_number == 10:
+	elif random_number == 4:
 		image = image4
-	elif random_number == 5 or random_number == 11:
+	elif random_number == 5:
 		image = image5
-	elif random_number == 6 or random_number == 12:
+	elif random_number == 0:
 		image = image6
 	else:
-		print(\"error\",random_number)
+		print(\"error\",random_number,\" \",numb)
 	# установка выбранной картинки видимой
 	$Sprite2D.texture = image
-	# выбор соответствующей картинки
+	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+@warning_ignore(\"unused_parameter\")
 func _process(delta):
 	pass
-
+	
 
 func _on_timer_busting_timeout():
 	# циклическая переборка картинок и их показ
-	if counter < 6:
+	if counter < num_revolut:
 		counter += 1
 		count += 1
+		Velocity.x += 50
+		Velocity.y += 50
+		#уменьшение масштаба картинки
+		Scale.x = scale_minus
+		Scale.y = scale_minus
+		scale_vozv(Scale.x)
+		apply_scale(Scale)
+		#print(Scale)
 		# запуск показа картинок граней
 		busting_the_dice(count)
 	else :
@@ -83,20 +119,16 @@ func _on_timer_busting_timeout():
 		$Timer_busting.stop()
 		# передача сигнала о готовности куба и его значение
 		emit_signal(\"cubu_gotov\",cube_face,gotov)
-		
 "
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_autnt"]
+size = Vector2(578, 568)
 
 [node name="Dice" type="Node2D"]
 metadata/_edit_group_ = true
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-shape = SubResource("RectangleShape2D_autnt")
-
 [node name="Dice_main" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-scale = Vector2(0.5, 0.5)
 script = SubResource("GDScript_f60cv")
 
 [node name="Timer_busting" type="Timer" parent="Dice_main"]
@@ -120,5 +152,10 @@ rotation = 0.00179119
 pivot_offset = Vector2(258, 248)
 
 [node name="Sprite2D" type="Sprite2D" parent="Dice_main"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Dice_main"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dice_main/RigidBody2D"]
+shape = SubResource("RectangleShape2D_autnt")
 
 [connection signal="timeout" from="Dice_main/Timer_busting" to="Dice_main" method="_on_timer_busting_timeout"]

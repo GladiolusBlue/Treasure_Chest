@@ -1,27 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6e5swb7oa78b"]
-
-[sub_resource type="GDScript" id="GDScript_wlxbl"]
-script/source = "extends Node2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	#%Dice_main.cubu_gotov.connect(self.next1)
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-"
+[gd_scene load_steps=4 format=3 uid="uid://b6e5swb7oa78b"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yuuf3"]
 
 [sub_resource type="GDScript" id="GDScript_f60cv"]
 script/source = "extends Node2D
 
-@export var Scale = Vector2.ONE
+\"можно задавать первоначальный масштаб, менять масштаб, менять количество
+ оборотов куба, задавать время показа картинки при вращении кубика\"
+
+@export var Scale = Vector2.ONE #экспорт переменной масштаба
 @export var speed = 400
 var Velocity = Vector2.ZERO
 var image1: CompressedTexture2D
@@ -37,56 +24,74 @@ var counter = 0
 var cube_face = 0 #номер изабражения грани кубика для передачи дальше
 var gotov = 0
 signal cubu_gotov
-@warning_ignore(\"unused_private_class_variable\")
-#var scale_x = 1
-#var scale_y = 1
-
+var scale_minus = 0.9
+ #значение на сколько уменьшать масштаб
+var scale_vozvrat = 1
+var num_revolut = 8 #количество переворотов граней куба
+var time_flip = 0.1 #  время переворота грани в секундах
 # Called when the node enters the scene tree for the first time.
+
+
 func _ready():
+	# загрузка текстур картинок
 	image1 = load(\"res://Dice_sprites/Enemy/Chest.png\")
 	image2 = load(\"res://Dice_sprites/Enemy/Dragon.png\")
 	image3 = load(\"res://Dice_sprites/Enemy/Goblin.png\")
 	image4 = load(\"res://Dice_sprites/Enemy/Potion.png\")
 	image5 = load(\"res://Dice_sprites/Enemy/Skeleton.png\")
 	image6 = load(\"res://Dice_sprites/Enemy/Slime.png\")
-	# загрузка текстур картинок
-	
-
-
-func fall_dice(): #падение кубика
-	print(Scale)
-	Scale.x = 1.8
-	Scale.y = 1.8
+	# первоначальная установка масштаба
+	Scale.x = 1.5
+	Scale.y = 1.5
 	apply_scale(Scale)
+	
+	
+func scale_vozv(scale_x):
+	# функция расчета коэффициента возврата масштаба в начальное положение для 
+	# переброски куба
+	#print(scale_x)
+	scale_vozvrat = scale_x*scale_vozvrat
+	
+	
+func fall_dice(): #падение кубика
+	scale_vozvrat = 1/scale_vozvrat
+	Scale.x = scale_vozvrat # Возврат первоначального размера масштаба
+	Scale.y = scale_vozvrat
+	apply_scale(Scale)# установка 100% значения от которого будем уменьшать
+	scale_vozvrat = 1
 	Scale.x = 1
 	Scale.y = 1
-	
 	# время задержки для показывания картинки при перелистывании
-	$Timer_busting.start(0.15)
+	$Timer_busting.start(time_flip)
 	# выбор рандомного числа от 1 до 6
 	var random_number = randi() % 6 + 1
 	count = random_number
 	_on_timer_busting_timeout()
-	cube_face = random_number
+	if (random_number+num_revolut)%6 == 0:
+		cube_face = 6
+	else:
+		cube_face = (random_number+num_revolut)%6 
+	
 	
 func busting_the_dice(i):
 	# показ картинок граней
 	# выбор соответствующей картинки
-	var random_number = i
-	if random_number == 1 or random_number == 7:
+	var numb = i
+	var random_number = numb%6
+	if random_number == 1:
 		image = image1
-	elif random_number == 2 or random_number == 8:
+	elif random_number == 2:
 		image = image2
-	elif random_number == 3 or random_number == 9:
+	elif random_number == 3:
 		image = image3
-	elif random_number == 4 or random_number == 10:
+	elif random_number == 4:
 		image = image4
-	elif random_number == 5 or random_number == 11:
+	elif random_number == 5:
 		image = image5
-	elif random_number == 6 or random_number == 12:
+	elif random_number == 0:
 		image = image6
 	else:
-		print(\"error\",random_number)
+		print(\"error\",random_number,\" \",numb)
 	# установка выбранной картинки видимой
 	$Sprite2D.texture = image
 	
@@ -99,15 +104,16 @@ func _process(delta):
 
 func _on_timer_busting_timeout():
 	# циклическая переборка картинок и их показ
-	if counter < 6:
+	if counter < num_revolut:
 		counter += 1
 		count += 1
 		Velocity.x += 50
 		Velocity.y += 50
-		Scale.x -= 0.04
-		Scale.y -= 0.04
+		#уменьшение масштаба картинки
+		Scale.x = scale_minus
+		Scale.y = scale_minus
+		scale_vozv(Scale.x)
 		apply_scale(Scale)
-		print(\"текущий\",Scale)
 		# запуск показа картинок граней
 		busting_the_dice(count)
 	else :
@@ -117,7 +123,6 @@ func _on_timer_busting_timeout():
 		$Timer_busting.stop()
 		# передача сигнала о готовности куба и его значение
 		emit_signal(\"cubu_gotov\",cube_face,gotov)
-		print(Scale)
 		
 "
 
@@ -125,14 +130,13 @@ func _on_timer_busting_timeout():
 size = Vector2(578, 568)
 
 [node name="Dice" type="Node2D"]
-position = Vector2(3, -1)
-script = SubResource("GDScript_wlxbl")
 metadata/_edit_group_ = true
 
 [node name="Dice_main" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 texture = SubResource("CompressedTexture2D_yuuf3")
 script = SubResource("GDScript_f60cv")
+Scale = Vector2(0.7, 0.7)
 
 [node name="Timer_busting" type="Timer" parent="Dice_main"]
 process_mode = 1

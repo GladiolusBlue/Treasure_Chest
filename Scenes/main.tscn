@@ -27,17 +27,21 @@ texture = ExtResource("2_yddrg")
 
 [node name="Dice_e1" parent="." instance=ExtResource("3_0tr2e")]
 position = Vector2(19.7183, 543.662)
+scale = Vector2(0.8, 0.8)
 script = null
 
 [node name="Dice_e2" parent="." instance=ExtResource("3_0tr2e")]
 position = Vector2(712.676, 540.845)
+scale = Vector2(0.8, 0.8)
 script = null
 
 [node name="Dice_p1" parent="." instance=ExtResource("4_gmop2")]
 position = Vector2(30.986, -529.578)
+scale = Vector2(0.8, 0.8)
 
 [node name="Dice_p2" parent="." instance=ExtResource("4_gmop2")]
 position = Vector2(791.549, -549.296)
+scale = Vector2(0.8, 0.8)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -14.0845)

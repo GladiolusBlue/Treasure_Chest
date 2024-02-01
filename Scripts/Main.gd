@@ -13,6 +13,7 @@ func _ready():
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+@warning_ignore("unused_parameter")
 func _process(delta):
 	pass
 
@@ -20,17 +21,20 @@ func _process(delta):
 func _on_button_1_pressed():
 	gotov = 0
 	$Dice_e1/Dice_main.fall_dice()
-
+	#print("test1","-",x,"-",y,"-",gotov)
 
 # запуск следующего куба по готовности
 func next1(x,y):
 	gotov += 1
 	if gotov == 1:
 		$Dice_e2/Dice_main.fall_dice()
+		print("E1","-",x,"-")
 	elif gotov == 2:
 		$Dice_p1/Dice_main.fall_dice()
+		print("E2","-",x,"-")
 	elif gotov == 3:
 		$Dice_p2/Dice_main.fall_dice()
+		print("P1","-",x,"-")
 	else :
-		print("test1","-",x,"-",y,"-",gotov)
+		print("P2","-",x,"-")
 

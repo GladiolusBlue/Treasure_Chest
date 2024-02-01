@@ -1,21 +1,29 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6e5swb7oa78b"]
+[gd_scene load_steps=5 format=3 uid="uid://b6e5swb7oa78b"]
 
-[ext_resource type="Script" path="res://Scripts/dice_enemi.gd" id="1_1dkg8"]
-[ext_resource type="Texture2D" uid="uid://cgpd5oj0bci7n" path="res://Dice_sprites/Enemy/Chest.png" id="1_ym0k4"]
-[ext_resource type="Texture2D" uid="uid://84w0c8r8tnba" path="res://Dice_sprites/Enemy/Dragon.png" id="2_84b85"]
-[ext_resource type="Texture2D" uid="uid://hae8v0dox1hk" path="res://Dice_sprites/Enemy/Slime.png" id="3_2asq2"]
-[ext_resource type="Texture2D" uid="uid://b2xs30dwa7qux" path="res://Dice_sprites/Enemy/Goblin.png" id="4_4qq8p"]
-[ext_resource type="Texture2D" uid="uid://c670nrybtt3cs" path="res://Dice_sprites/Enemy/Skeleton.png" id="5_uw0er"]
-[ext_resource type="Texture2D" uid="uid://byv63cwkivce6" path="res://Dice_sprites/Enemy/Potion.png" id="6_es1fi"]
+[sub_resource type="GDScript" id="GDScript_wlxbl"]
+script/source = "extends Node2D
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_autnt"]
-size = Vector2(578, 568)
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	#%Dice_main.cubu_gotov.connect(self.next1)
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yuuf3"]
 
 [sub_resource type="GDScript" id="GDScript_f60cv"]
 script/source = "extends Node2D
 
+@export var Scale = Vector2.ONE
+@export var speed = 400
+var Velocity = Vector2.ZERO
 var image1: CompressedTexture2D
 var image2: CompressedTexture2D
 var image3: CompressedTexture2D
@@ -29,7 +37,9 @@ var counter = 0
 var cube_face = 0 #номер изабражения грани кубика для передачи дальше
 var gotov = 0
 signal cubu_gotov
-
+@warning_ignore(\"unused_private_class_variable\")
+#var scale_x = 1
+#var scale_y = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -39,12 +49,18 @@ func _ready():
 	image4 = load(\"res://Dice_sprites/Enemy/Potion.png\")
 	image5 = load(\"res://Dice_sprites/Enemy/Skeleton.png\")
 	image6 = load(\"res://Dice_sprites/Enemy/Slime.png\")
-	
 	# загрузка текстур картинок
 	
 
 
 func fall_dice(): #падение кубика
+	print(Scale)
+	Scale.x = 1.8
+	Scale.y = 1.8
+	apply_scale(Scale)
+	Scale.x = 1
+	Scale.y = 1
+	
 	# время задержки для показывания картинки при перелистывании
 	$Timer_busting.start(0.15)
 	# выбор рандомного числа от 1 до 6
@@ -55,38 +71,28 @@ func fall_dice(): #падение кубика
 	
 func busting_the_dice(i):
 	# показ картинок граней
+	# выбор соответствующей картинки
 	var random_number = i
-	if random_number == 1:
+	if random_number == 1 or random_number == 7:
 		image = image1
-	elif random_number == 2:
+	elif random_number == 2 or random_number == 8:
 		image = image2
-	elif random_number == 3:
+	elif random_number == 3 or random_number == 9:
 		image = image3
-	elif random_number == 4:
+	elif random_number == 4 or random_number == 10:
 		image = image4
-	elif random_number == 5:
+	elif random_number == 5 or random_number == 11:
 		image = image5
-	elif random_number == 6:
-		image = image6
-	elif random_number == 7:
-		image = image1
-	elif random_number == 8:
-		image = image2
-	elif random_number == 9:
-		image = image3
-	elif random_number == 10:
-		image = image4
-	elif random_number == 11:
-		image = image5
-	elif random_number == 12:
+	elif random_number == 6 or random_number == 12:
 		image = image6
 	else:
 		print(\"error\",random_number)
 	# установка выбранной картинки видимой
 	$Sprite2D.texture = image
-	# выбор соответствующей картинки
+	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+@warning_ignore(\"unused_parameter\")
 func _process(delta):
 	pass
 	
@@ -96,6 +102,12 @@ func _on_timer_busting_timeout():
 	if counter < 6:
 		counter += 1
 		count += 1
+		Velocity.x += 50
+		Velocity.y += 50
+		Scale.x -= 0.04
+		Scale.y -= 0.04
+		apply_scale(Scale)
+		print(\"текущий\",Scale)
 		# запуск показа картинок граней
 		busting_the_dice(count)
 	else :
@@ -105,52 +117,49 @@ func _on_timer_busting_timeout():
 		$Timer_busting.stop()
 		# передача сигнала о готовности куба и его значение
 		emit_signal(\"cubu_gotov\",cube_face,gotov)
+		print(Scale)
+		
 "
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_autnt"]
+size = Vector2(578, 568)
+
 [node name="Dice" type="Node2D"]
-script = ExtResource("1_1dkg8")
+position = Vector2(3, -1)
+script = SubResource("GDScript_wlxbl")
 metadata/_edit_group_ = true
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-shape = SubResource("RectangleShape2D_autnt")
-
-[node name="Chest" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("1_ym0k4")
-
-[node name="Dragon" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_84b85")
-
-[node name="Slime" type="Sprite2D" parent="."]
-visible = false
-rotation = 0.0563472
-texture = ExtResource("3_2asq2")
-
-[node name="Goblin" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("4_4qq8p")
-
-[node name="Skeleton" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("5_uw0er")
-
-[node name="Potion" type="Sprite2D" parent="."]
-visible = false
-rotation = -0.0854229
-texture = ExtResource("6_es1fi")
 
 [node name="Dice_main" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 texture = SubResource("CompressedTexture2D_yuuf3")
 script = SubResource("GDScript_f60cv")
 
-[node name="Sprite2D" type="Sprite2D" parent="Dice_main"]
-
 [node name="Timer_busting" type="Timer" parent="Dice_main"]
 process_mode = 1
 wait_time = 0.2
+
+[node name="Button" type="Button" parent="Dice_main"]
+visible = false
+anchors_preset = -1
+anchor_left = -252.5
+anchor_top = -245.5
+anchor_right = 253.5
+anchor_bottom = 246.5
+offset_left = -0.655182
+offset_top = 0.671341
+offset_right = -0.655182
+offset_bottom = 0.671341
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.000432387
+pivot_offset = Vector2(250.748, 244.062)
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Dice_main"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Dice_main"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dice_main/RigidBody2D"]
+shape = SubResource("RectangleShape2D_autnt")
 
 [connection signal="timeout" from="Dice_main/Timer_busting" to="Dice_main" method="_on_timer_busting_timeout"]

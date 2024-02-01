@@ -1,16 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://b5quk5jybqi1m"]
-
-[ext_resource type="Texture2D" uid="uid://cgpd5oj0bci7n" path="res://Dice_sprites/Enemy/Chest.png" id="1_c6eng"]
-[ext_resource type="Texture2D" uid="uid://84w0c8r8tnba" path="res://Dice_sprites/Enemy/Dragon.png" id="2_0oesl"]
-[ext_resource type="Texture2D" uid="uid://hae8v0dox1hk" path="res://Dice_sprites/Enemy/Slime.png" id="3_781aj"]
-[ext_resource type="Texture2D" uid="uid://b2xs30dwa7qux" path="res://Dice_sprites/Enemy/Goblin.png" id="4_4yd5k"]
-[ext_resource type="Texture2D" uid="uid://c670nrybtt3cs" path="res://Dice_sprites/Enemy/Skeleton.png" id="5_fftw7"]
-[ext_resource type="Texture2D" uid="uid://byv63cwkivce6" path="res://Dice_sprites/Enemy/Potion.png" id="6_vn40s"]
+[gd_scene load_steps=3 format=3 uid="uid://b5quk5jybqi1m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_autnt"]
 size = Vector2(578, 568)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yuuf3"]
 
 [sub_resource type="GDScript" id="GDScript_f60cv"]
 script/source = "extends Node2D
@@ -55,29 +46,17 @@ func fall_dice(): #падение кубика
 func busting_the_dice(i):
 	# показ картинок граней
 	var random_number = i
-	if random_number == 1:
+	if random_number == 1 or random_number == 7:
 		image = image1
-	elif random_number == 2:
+	elif random_number == 2 or random_number == 8:
 		image = image2
-	elif random_number == 3:
+	elif random_number == 3 or random_number == 9:
 		image = image3
-	elif random_number == 4:
+	elif random_number == 4 or random_number == 10:
 		image = image4
-	elif random_number == 5:
+	elif random_number == 5 or random_number == 11:
 		image = image5
-	elif random_number == 6:
-		image = image6
-	elif random_number == 7:
-		image = image1
-	elif random_number == 8:
-		image = image2
-	elif random_number == 9:
-		image = image3
-	elif random_number == 10:
-		image = image4
-	elif random_number == 11:
-		image = image5
-	elif random_number == 12:
+	elif random_number == 6 or random_number == 12:
 		image = image6
 	else:
 		print(\"error\",random_number)
@@ -115,41 +94,31 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("RectangleShape2D_autnt")
 
-[node name="Chest" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("1_c6eng")
-
-[node name="Dragon" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_0oesl")
-
-[node name="Slime" type="Sprite2D" parent="."]
-visible = false
-rotation = 0.0563472
-texture = ExtResource("3_781aj")
-
-[node name="Goblin" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("4_4yd5k")
-
-[node name="Skeleton" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("5_fftw7")
-
-[node name="Potion" type="Sprite2D" parent="."]
-visible = false
-rotation = -0.0854229
-texture = ExtResource("6_vn40s")
-
 [node name="Dice_main" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-texture = SubResource("CompressedTexture2D_yuuf3")
+scale = Vector2(0.5, 0.5)
 script = SubResource("GDScript_f60cv")
-
-[node name="Sprite2D" type="Sprite2D" parent="Dice_main"]
 
 [node name="Timer_busting" type="Timer" parent="Dice_main"]
 process_mode = 1
 wait_time = 0.2
+
+[node name="Button" type="Button" parent="Dice_main"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -267.5
+offset_top = -245.5
+offset_right = 239.5
+offset_bottom = 255.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.00179119
+pivot_offset = Vector2(258, 248)
+
+[node name="Sprite2D" type="Sprite2D" parent="Dice_main"]
 
 [connection signal="timeout" from="Dice_main/Timer_busting" to="Dice_main" method="_on_timer_busting_timeout"]

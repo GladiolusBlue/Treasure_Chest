@@ -3,6 +3,9 @@
 [sub_resource type="GDScript" id="GDScript_f60cv"]
 script/source = "extends Node2D
 
+\"можно задавать первоначальный масштаб, менять масштаб, менять количество
+ оборотов куба, задавать время показа картинки при вращении кубика\"
+
 @export var Scale = Vector2.ONE #экспорт переменной масштаба
 @export var speed = 400
 var Velocity = Vector2.ZERO
@@ -19,12 +22,11 @@ var counter = 0
 var cube_face = 0 #номер изабражения грани кубика для передачи дальше
 var gotov = 0
 signal cubu_gotov
-var scale_minus = 0.9
- #значение на сколько уменьшать масштаб
 var scale_vozvrat = 1
-var num_revolut = 8 #количество переворотов граней куба
-# Called when the node enters the scene tree for the first time.
-
+var num_revolut = 10 #количество переворотов граней куба
+var time_flip = 0.13#  время переворота грани в секундах
+var name_face = \"player\"
+var scale_minus = 1-(0.5/num_revolut) #значение на сколько уменьшать масштаб
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,15 +38,14 @@ func _ready():
 	image5 = load(\"res://Dice_sprites/Player/Thief.png\")
 	image6 = load(\"res://Dice_sprites/Player/Warrior.png\")
 	# первоначальная установка масштаба
-	Scale.x = 1.5
-	Scale.y = 1.5
+	Scale.x = 1
+	Scale.y = 1
 	apply_scale(Scale)
 	
 	
 func scale_vozv(scale_x):
 	# функция расчета коэффициента возврата масштаба в начальное положение для 
 	# переброски куба
-	#print(scale_x)
 	scale_vozvrat = scale_x*scale_vozvrat
 	
 	
@@ -75,16 +76,22 @@ func busting_the_dice(i):
 	var random_number = numb%6
 	if random_number == 1:
 		image = image1
+		name_face = \"Cliric\"
 	elif random_number == 2:
 		image = image2
+		name_face = \"Guardian\"
 	elif random_number == 3:
-		image = image3
-	elif random_number == 4:
-		image = image4
-	elif random_number == 5:
 		image = image5
-	elif random_number == 0:
+		name_face = \"Thief\"
+	elif random_number == 4:
+		image = image3
+		name_face = \"Magician\"
+	elif random_number == 5:
 		image = image6
+		name_face = \"Warrior\"
+	elif random_number == 0:
+		image = image4
+		name_face = \"Scroll\"
 	else:
 		print(\"error\",random_number,\" \",numb)
 	# установка выбранной картинки видимой
@@ -109,7 +116,6 @@ func _on_timer_busting_timeout():
 		Scale.y = scale_minus
 		scale_vozv(Scale.x)
 		apply_scale(Scale)
-		#print(Scale)
 		# запуск показа картинок граней
 		busting_the_dice(count)
 	else :
@@ -118,7 +124,7 @@ func _on_timer_busting_timeout():
 		counter = 0
 		$Timer_busting.stop()
 		# передача сигнала о готовности куба и его значение
-		emit_signal(\"cubu_gotov\",cube_face,gotov)
+		emit_signal(\"cubu_gotov\",str(cube_face),name_face)
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_autnt"]
@@ -154,6 +160,7 @@ pivot_offset = Vector2(258, 248)
 [node name="Sprite2D" type="Sprite2D" parent="Dice_main"]
 
 [node name="RigidBody2D" type="RigidBody2D" parent="Dice_main"]
+can_sleep = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dice_main/RigidBody2D"]
 shape = SubResource("RectangleShape2D_autnt")

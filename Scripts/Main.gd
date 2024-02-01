@@ -3,6 +3,8 @@ var gotov = 0
 var cube = 0
 var g = 0
 var c = 0
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#опрос сигнала от кубов о готовности
@@ -13,6 +15,8 @@ func _ready():
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+
+
 @warning_ignore("unused_parameter")
 func _process(delta):
 	pass
@@ -22,19 +26,20 @@ func _on_button_1_pressed():
 	gotov = 0
 	$Dice_e1/Dice_main.fall_dice()
 	#print("test1","-",x,"-",y,"-",gotov)
+	
 
 # запуск следующего куба по готовности
 func next1(x,y):
 	gotov += 1
 	if gotov == 1:
 		$Dice_e2/Dice_main.fall_dice()
-		print("E1","-",x,"-")
+		print("E1","-",x,"-",y)
 	elif gotov == 2:
 		$Dice_p1/Dice_main.fall_dice()
-		print("E2","-",x,"-")
+		print("E2","-",x,"-",y)
 	elif gotov == 3:
 		$Dice_p2/Dice_main.fall_dice()
-		print("P1","-",x,"-")
+		print("P1","-",x,"-",y)
 	else :
-		print("P2","-",x,"-")
+		print("P2","-",x,"-",y)
 

@@ -8,7 +8,7 @@ script/source = "extends Node2D
 \"можно задавать первоначальный масштаб, менять масштаб, менять количество
  оборотов куба, задавать время показа картинки при вращении кубика\"
 
-@export var Scale = Vector2.ONE #экспорт переменной масштаба
+var Scale = Vector2.ONE #экспорт переменной масштаба
 @export var speed = 400
 var Velocity = Vector2.ZERO
 var image1: CompressedTexture2D
@@ -43,8 +43,8 @@ func _ready():
 	image5 = load(\"res://Dice_sprites/Enemy/Skeleton.png\")
 	image6 = load(\"res://Dice_sprites/Enemy/Slime.png\")
 	# первоначальная установка масштаба
-	Scale.x = 1
-	Scale.y = 1
+	Scale.x = 0.8
+	Scale.y = 0.8
 	apply_scale(Scale)
 	
 	
@@ -151,7 +151,6 @@ metadata/_edit_group_ = true
 unique_name_in_owner = true
 texture = SubResource("CompressedTexture2D_yuuf3")
 script = SubResource("GDScript_f60cv")
-Scale = Vector2(0.7, 0.7)
 
 [node name="Timer_busting" type="Timer" parent="Dice_main"]
 process_mode = 1

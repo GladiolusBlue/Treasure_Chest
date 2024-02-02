@@ -27,6 +27,9 @@ var num_revolut = 10 #количество переворотов граней �
 var time_flip = 0.13#  время переворота грани в секундах
 var name_face = \"player\"
 var scale_minus = 1-(0.5/num_revolut) #значение на сколько уменьшать масштаб
+var x = 0
+var y = 0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,7 +52,11 @@ func scale_vozv(scale_x):
 	scale_vozvrat = scale_x*scale_vozvrat
 	
 	
-func fall_dice(): #падение кубика
+func fall_dice(a,b): #падение кубика
+	Velocity = Vector2.ZERO
+	set_position(Velocity)
+	x = a
+	y = b
 	scale_vozvrat = 1/scale_vozvrat
 	Scale.x = scale_vozvrat # Возврат первоначального размера масштаба
 	Scale.y = scale_vozvrat
@@ -58,11 +65,12 @@ func fall_dice(): #падение кубика
 	Scale.x = 1
 	Scale.y = 1
 	# время задержки для показывания картинки при перелистывании
-	$Timer_busting.start(0.15)
+	$Timer_busting.start(time_flip)
 	# выбор рандомного числа от 1 до 6
 	var random_number = randi() % 6 + 1
 	count = random_number
 	_on_timer_busting_timeout()
+	#print(a,b,x,y)
 	if (random_number+num_revolut)%6 == 0:
 		cube_face = 6
 	else:
@@ -76,22 +84,22 @@ func busting_the_dice(i):
 	var random_number = numb%6
 	if random_number == 1:
 		image = image1
-		name_face = \"Cliric\"
+		name_face = \"Chest\"
 	elif random_number == 2:
 		image = image2
-		name_face = \"Guardian\"
+		name_face = \"Dragon\"
 	elif random_number == 3:
 		image = image5
-		name_face = \"Thief\"
+		name_face = \"Skeleton\"
 	elif random_number == 4:
-		image = image3
-		name_face = \"Magician\"
-	elif random_number == 5:
 		image = image6
-		name_face = \"Warrior\"
+		name_face = \"Slime\"
+	elif random_number == 5:
+		image = image3
+		name_face = \"Goblin\"
 	elif random_number == 0:
 		image = image4
-		name_face = \"Scroll\"
+		name_face = \"Potion\"
 	else:
 		print(\"error\",random_number,\" \",numb)
 	# установка выбранной картинки видимой
@@ -99,8 +107,9 @@ func busting_the_dice(i):
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-@warning_ignore(\"unused_parameter\")
+#@warning_ignore(\"unused_parameter\")
 func _process(delta):
+	#move_and_slide(Velocity)
 	pass
 	
 
@@ -109,8 +118,9 @@ func _on_timer_busting_timeout():
 	if counter < num_revolut:
 		counter += 1
 		count += 1
-		Velocity.x += 50
-		Velocity.y += 50
+		Velocity.x += x/num_revolut
+		Velocity.y += y/num_revolut
+		set_position(Velocity)
 		#уменьшение масштаба картинки
 		Scale.x = scale_minus
 		Scale.y = scale_minus
@@ -122,9 +132,11 @@ func _on_timer_busting_timeout():
 		# остановка таймера и переборки картинок
 		gotov = 1
 		counter = 0
+		set_position(Velocity)
 		$Timer_busting.stop()
 		# передача сигнала о готовности куба и его значение
 		emit_signal(\"cubu_gotov\",str(cube_face),name_face)
+		print(Velocity)
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_autnt"]

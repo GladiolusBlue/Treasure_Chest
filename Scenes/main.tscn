@@ -26,20 +26,12 @@ scale = Vector2(1.45246, 1.47447)
 texture = ExtResource("2_yddrg")
 
 [node name="Dice_e1" parent="." instance=ExtResource("3_0tr2e")]
-position = Vector2(19, 550)
-scale = Vector2(0.8, 0.8)
 
 [node name="Dice_e2" parent="." instance=ExtResource("3_0tr2e")]
-position = Vector2(700, 550)
-scale = Vector2(0.8, 0.8)
 
 [node name="Dice_p1" parent="." instance=ExtResource("4_gmop2")]
-position = Vector2(19, -550)
-scale = Vector2(0.8, 0.8)
 
 [node name="Dice_p2" parent="." instance=ExtResource("4_gmop2")]
-position = Vector2(700, -550)
-scale = Vector2(0.8, 0.8)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -14.0845)

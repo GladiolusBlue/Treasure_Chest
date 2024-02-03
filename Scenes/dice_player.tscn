@@ -41,8 +41,8 @@ func _ready():
 	image5 = load(\"res://Dice_sprites/Player/Thief.png\")
 	image6 = load(\"res://Dice_sprites/Player/Warrior.png\")
 	# первоначальная установка масштаба
-	Scale.x = 0.8
-	Scale.y = 0.8
+	Scale.x = 0.5
+	Scale.y = 0.5
 	apply_scale(Scale)
 	
 	

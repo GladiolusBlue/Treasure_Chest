@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://bddnesojb3xex"]
+
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_h2vby"]
+[ext_resource type="Texture2D" uid="uid://blhmd5qdxkop7" path="res://icon.svg" id="2_yddrg"]
+[ext_resource type="PackedScene" uid="uid://b6e5swb7oa78b" path="res://Scenes/dice_enemi.tscn" id="3_0tr2e"]
+[ext_resource type="PackedScene" uid="uid://b5quk5jybqi1m" path="res://Scenes/dice_player.tscn" id="4_gmop2"]
+
+[node name="Node2D" type="Node2D"]
+scale = Vector2(0.355, 0.355)
+script = ExtResource("1_h2vby")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-1338.03, -5.6338)
+metadata/_edit_group_ = true
+
+[node name="Button1" type="Button" parent="Node2D"]
+offset_left = -93.0
+offset_top = -85.0
+offset_right = 94.0
+offset_bottom = 98.0
+size_flags_horizontal = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Button1"]
+position = Vector2(95.7746, 94.3662)
+scale = Vector2(1.45246, 1.47447)
+texture = ExtResource("2_yddrg")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -14.0845)
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Dice_e1" parent="Node" instance=ExtResource("3_0tr2e")]
+scale = Vector2(0.355, 0.355)
+metadata/a = 700
+metadata/b = -650
+
+[node name="Dice_e2" parent="Node" instance=ExtResource("3_0tr2e")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p1" parent="Node" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p2" parent="Node" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p3" parent="Node" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p4" parent="Node" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p5" parent="Node" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p6" parent="Node" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p7" parent="Node" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[connection signal="pressed" from="Node2D/Button1" to="." method="_on_button_1_pressed"]

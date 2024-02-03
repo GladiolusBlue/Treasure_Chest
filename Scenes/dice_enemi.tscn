@@ -102,8 +102,8 @@ func busting_the_dice(i):
 	elif random_number == 0:
 		image = image4
 		name_face = \"Potion\"
-	else:
-		print(\"error\",random_number,\" \",numb)
+	#else:
+		#print(\"error\",random_number,\" \",numb)
 	# установка выбранной картинки видимой
 	$Sprite2D.texture = image
 	
@@ -138,7 +138,7 @@ func _on_timer_busting_timeout():
 		$Timer_busting.stop()
 		# передача сигнала о готовности куба и его значение
 		emit_signal(\"cubu_gotov\",str(cube_face),name_face)
-		print(Velocity)
+		#print(Velocity)
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_autnt"]

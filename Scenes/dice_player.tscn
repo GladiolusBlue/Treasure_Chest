@@ -100,8 +100,8 @@ func busting_the_dice(i):
 	elif random_number == 0:
 		image = image4
 		name_face = \"Potion\"
-	else:
-		print(\"error\",random_number,\" \",numb)
+	#else:
+		#print(\"error\",random_number,\" \",numb)
 	# установка выбранной картинки видимой
 	$Sprite2D.texture = image
 	
@@ -136,11 +136,11 @@ func _on_timer_busting_timeout():
 		$Timer_busting.stop()
 		# передача сигнала о готовности куба и его значение
 		emit_signal(\"cubu_gotov\",str(cube_face),name_face)
-		print(Velocity)
+		#print(Velocity)
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_autnt"]
-size = Vector2(578, 568)
+size = Vector2(609, 568)
 
 [node name="Dice" type="Node2D"]
 metadata/_edit_group_ = true
@@ -175,6 +175,7 @@ pivot_offset = Vector2(258, 248)
 can_sleep = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dice_main/RigidBody2D"]
+position = Vector2(15.5, 0)
 shape = SubResource("RectangleShape2D_autnt")
 
 [connection signal="timeout" from="Dice_main/Timer_busting" to="Dice_main" method="_on_timer_busting_timeout"]

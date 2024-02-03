@@ -10,7 +10,7 @@ scale = Vector2(0.355, 0.355)
 script = ExtResource("1_h2vby")
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2(-1377.46, 8.45068)
+position = Vector2(-1338.03, -5.6338)
 metadata/_edit_group_ = true
 
 [node name="Button1" type="Button" parent="Node2D"]
@@ -28,37 +28,35 @@ texture = ExtResource("2_yddrg")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -14.0845)
 
-[node name="WhiteCubes" type="Node" parent="."]
+[node name="Node" type="Node" parent="."]
 
-[node name="Dice_p1" parent="WhiteCubes" instance=ExtResource("4_gmop2")]
-scale = Vector2(0.355, 0.355)
-
-[node name="Dice_p2" parent="WhiteCubes" instance=ExtResource("4_gmop2")]
-scale = Vector2(0.355, 0.355)
-
-[node name="Dice_p3" parent="WhiteCubes" instance=ExtResource("4_gmop2")]
-scale = Vector2(0.355, 0.355)
-
-[node name="Dice_p4" parent="WhiteCubes" instance=ExtResource("4_gmop2")]
-scale = Vector2(0.355, 0.355)
-
-[node name="Dice_p5" parent="WhiteCubes" instance=ExtResource("4_gmop2")]
-scale = Vector2(0.355, 0.355)
-
-[node name="Dice_p6" parent="WhiteCubes" instance=ExtResource("4_gmop2")]
-scale = Vector2(0.355, 0.355)
-
-[node name="Dice_p7" parent="WhiteCubes" instance=ExtResource("4_gmop2")]
-scale = Vector2(0.355, 0.355)
-
-[node name="DarkCubes" type="Node" parent="."]
-
-[node name="Dice_e1" parent="DarkCubes" instance=ExtResource("3_0tr2e")]
+[node name="Dice_e1" parent="Node" instance=ExtResource("3_0tr2e")]
 scale = Vector2(0.355, 0.355)
 metadata/a = 700
 metadata/b = -650
 
-[node name="Dice_e2" parent="DarkCubes" instance=ExtResource("3_0tr2e")]
+[node name="Dice_e2" parent="Node" instance=ExtResource("3_0tr2e")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p1" parent="Node" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p2" parent="Node" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p3" parent="Node" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p4" parent="Node" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p5" parent="Node" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p6" parent="Node" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p7" parent="Node" instance=ExtResource("4_gmop2")]
 scale = Vector2(0.355, 0.355)
 
 [connection signal="pressed" from="Node2D/Button1" to="." method="_on_button_1_pressed"]

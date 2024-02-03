@@ -33,6 +33,16 @@ texture = ExtResource("2_yddrg")
 
 [node name="Dice_p2" parent="." instance=ExtResource("4_gmop2")]
 
+[node name="Dice_p3" parent="." instance=ExtResource("4_gmop2")]
+
+[node name="Dice_p4" parent="." instance=ExtResource("4_gmop2")]
+
+[node name="Dice_p5" parent="." instance=ExtResource("4_gmop2")]
+
+[node name="Dice_p6" parent="." instance=ExtResource("4_gmop2")]
+
+[node name="Dice_p7" parent="." instance=ExtResource("4_gmop2")]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -14.0845)
 

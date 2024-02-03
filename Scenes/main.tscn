@@ -25,25 +25,41 @@ position = Vector2(95.7746, 94.3662)
 scale = Vector2(1.45246, 1.47447)
 texture = ExtResource("2_yddrg")
 
-[node name="Dice_e1" parent="." instance=ExtResource("3_0tr2e")]
-
-[node name="Dice_e2" parent="." instance=ExtResource("3_0tr2e")]
-
-[node name="Dice_p1" parent="." instance=ExtResource("4_gmop2")]
-
-[node name="Dice_p2" parent="." instance=ExtResource("4_gmop2")]
-
-[node name="Dice_p3" parent="." instance=ExtResource("4_gmop2")]
-
-[node name="Dice_p4" parent="." instance=ExtResource("4_gmop2")]
-
-[node name="Dice_p5" parent="." instance=ExtResource("4_gmop2")]
-
-[node name="Dice_p6" parent="." instance=ExtResource("4_gmop2")]
-
-[node name="Dice_p7" parent="." instance=ExtResource("4_gmop2")]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -14.0845)
+
+[node name="WhiteCubes" type="Node" parent="."]
+
+[node name="Dice_p1" parent="WhiteCubes" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p2" parent="WhiteCubes" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p3" parent="WhiteCubes" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p4" parent="WhiteCubes" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p5" parent="WhiteCubes" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p6" parent="WhiteCubes" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_p7" parent="WhiteCubes" instance=ExtResource("4_gmop2")]
+scale = Vector2(0.355, 0.355)
+
+[node name="DarkCubes" type="Node" parent="."]
+
+[node name="Dice_e1" parent="DarkCubes" instance=ExtResource("3_0tr2e")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_e2" parent="DarkCubes" instance=ExtResource("3_0tr2e")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_e3" parent="DarkCubes" instance=ExtResource("3_0tr2e")]
+scale = Vector2(0.355, 0.355)
 
 [connection signal="pressed" from="Node2D/Button1" to="." method="_on_button_1_pressed"]

@@ -5,6 +5,7 @@ var a = 0
 var b = 0
 var start_pos =700
 var enemi = 0
+var Diceenemy1 = 0
 
 
 
@@ -20,7 +21,7 @@ func _ready():
 	$Dice_p5/Dice_main.cubu_gotov.connect(self.next1)
 	$Dice_p6/Dice_main.cubu_gotov.connect(self.next1)
 	$Dice_p7/Dice_main.cubu_gotov.connect(self.next1)
-	#var enemi = $Dice_e1/Dice_main
+	Diceenemy1 = $Dice_e1/Dice_main
 	
 	
 
@@ -37,8 +38,8 @@ func _on_button_1_pressed():
 	gotov = 0
 	a = 0
 	b = -650
+	Diceenemy1.fall_dice(a,b)
 	#$Dice_e1/Dice_main.fall_dice(a,b)
-	$Dice_e1/Dice_main.fall_dice(a,b)
 	#print("test1","-",a,"-",b,"-",gotov)
 	
 

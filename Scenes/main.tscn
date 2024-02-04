@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://b5quk5jybqi1m" path="res://Scenes/dice_player.tscn" id="4_gmop2"]
 
 [node name="Node2D" type="Node2D"]
-scale = Vector2(0.355, 0.355)
 script = ExtResource("1_h2vby")
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -14,6 +13,7 @@ position = Vector2(-1338.03, -5.6338)
 metadata/_edit_group_ = true
 
 [node name="Button1" type="Button" parent="Node2D"]
+self_modulate = Color(1, 1, 1, 0)
 offset_left = -93.0
 offset_top = -85.0
 offset_right = 94.0

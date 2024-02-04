@@ -24,6 +24,7 @@ var counter = 0
 var cube_face = 0 #номер изабражения грани кубика для передачи дальше
 var gotov = 0
 signal cubu_gotov
+signal cubu_clic
 var scale_vozvrat = 1
 var num_revolut = 8 #количество переворотов граней куба
 var time_flip = 0.13 #  время переворота грани в секундах
@@ -31,6 +32,10 @@ var name_face = \"enemy\"
 var scale_minus = 1-(0.5/num_revolut) #значение на сколько уменьшать масштаб
 var x = 0
 var y = 0
+var rot = 0
+var start_x = 0
+var start_y = 0
+var num_dice = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -54,10 +59,14 @@ func scale_vozv(scale_x):
 	scale_vozvrat = scale_x*scale_vozvrat
 	
 	
-func fall_dice(a,b): #падение кубика
-	Velocity = Vector2.ZERO
-	set_position(Velocity)
-	x = a
+func fall_dice(a,b,m,n,i): #падение кубика
+	rot = 0
+	start_x = m
+	start_y = n
+	num_dice = i
+	Velocity = Vector2.ZERO #задание стартового местоположения вцентре
+	set_position(Velocity) # запись местоположения 
+	x = a # приём значения о конечном местоположении
 	y = b
 	scale_vozvrat = 1/scale_vozvrat
 	Scale.x = scale_vozvrat # Возврат первоначального размера масштаба
@@ -138,7 +147,48 @@ func _on_timer_busting_timeout():
 		$Timer_busting.stop()
 		# передача сигнала о готовности куба и его значение
 		emit_signal(\"cubu_gotov\",str(cube_face),name_face)
-		print(Velocity)
+		to_start_pos()
+		#print(Velocity)
+		
+		
+func to_start_pos():
+	#Velocity = Vector2.ZERO #задание стартового местоположения вцентре
+	x = start_x - x# приём значения о конечном местоположении
+	y = start_y - y
+	
+	set_position(Velocity) # запись местоположения 
+	#print(x,y)
+	# время задержки для показывания картинки при перелистывании
+	rot = 1
+	$Timer_busting2.start(time_flip)
+	pass
+
+
+func _on_timer_busting_2_timeout():
+	if counter < num_revolut:
+		counter += 1
+		Velocity.x += x/num_revolut #изменение координат для местоположения
+		Velocity.y += y/num_revolut
+		set_position(Velocity)
+		#уменьшение масштаба картинки
+		#busting_the_dice(count)
+	else :
+		# остановка таймера и переборки картинок
+		gotov = 1
+		counter = 0
+		set_position(Velocity)
+		$Timer_busting2.stop()
+	pass # Replace with function body.
+
+
+
+func _on_button_pressed():
+	emit_signal(\"cubu_clic\",num_dice,name_face)
+	
+
+
+func _on_cubu_gotov():
+	pass # Replace with function body.
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_autnt"]
@@ -156,21 +206,23 @@ script = SubResource("GDScript_f60cv")
 process_mode = 1
 wait_time = 0.2
 
+[node name="Timer_busting2" type="Timer" parent="Dice_main"]
+process_mode = 1
+wait_time = 0.1
+
 [node name="Button" type="Button" parent="Dice_main"]
-visible = false
-anchors_preset = -1
-anchor_left = -252.5
-anchor_top = -245.5
-anchor_right = 253.5
-anchor_bottom = 246.5
-offset_left = -0.655182
-offset_top = 0.671341
-offset_right = -0.655182
-offset_bottom = 0.671341
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
-rotation = 0.000432387
-pivot_offset = Vector2(250.748, 244.062)
+pivot_offset = Vector2(250, 250)
+action_mode = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Dice_main"]
@@ -181,3 +233,5 @@ metadata/_edit_use_anchors_ = true
 shape = SubResource("RectangleShape2D_autnt")
 
 [connection signal="timeout" from="Dice_main/Timer_busting" to="Dice_main" method="_on_timer_busting_timeout"]
+[connection signal="timeout" from="Dice_main/Timer_busting2" to="Dice_main" method="_on_timer_busting_2_timeout"]
+[connection signal="pressed" from="Dice_main/Button" to="Dice_main" method="_on_button_pressed"]

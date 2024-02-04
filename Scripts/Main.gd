@@ -2,10 +2,10 @@ extends Node
 
 #var gotov = 0
 #var cube = 0
-var a = 0
+var nam_dc = 0 # количество черных кубиков
 #var b = 0
 #var   start_pos_e =-700
-const  start_pos = -1000
+const  start_pos = -700 # половина ширины расстановки кубиков игрока
 #var Dicename = []
 #var name_dice = 0
 #var o = "p1"
@@ -13,16 +13,18 @@ const  start_pos = -1000
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#опрос сигнала от кубов о готовности
+	# подключение опроса сигнала от кубов о готовности
 	for i in range($WhiteCubes.get_child_count()):
 		var Dices = $WhiteCubes.get_child(i)
 		var cube = Dices.get_child(0)
-		cube.cubu_gotov.connect(self.next1)
+		cube.cubu_gotov.connect(self.next_p)
+		cube.cubu_clic.connect(self.next_clic_p) # при поступлении сигнала запуск функции next1
 	for i in range($DarkCubes.get_child_count()):
 		var Dices = $DarkCubes.get_child(i)
 		var cube = Dices.get_child(0)
-		cube.cubu_gotov.connect(self.next1)
-		a += 1
+		cube.cubu_gotov.connect(self.next_e)
+		cube.cubu_clic.connect(self.next_clic_e)
+		nam_dc += 1
 		#print(a)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
@@ -31,19 +33,20 @@ func _ready():
 func _process(delta):
 	pass
 	
-"
+
+# функция рандомного разбрасывания кубиков по полю
 func rndbynoove(locatarr):
 	var x = 0
 	var y = 0
-	var cubesize = 50
+	var cubesize = 100
 	var polesizeX = 1000
-	var polesizeY = 800
+	var polesizeY = -800
 	var rng = RandomNumberGenerator.new()
 	while true:
 		rng.randomize()
-		x = rng.randi_range(-polesizeX, polesizeX)
+		x = rng.randi_range( -polesizeX, polesizeX)
 		#y = 700
-		#y = rng.randi_range(-polesizeY, polesizeY)
+		y = rng.randi_range(polesizeY,-polesizeY)
 		var endwhile = false
 		var num = 0
 		for i in range(locatarr.size()):
@@ -56,32 +59,37 @@ func rndbynoove(locatarr):
 		if (endwhile == true):
 			break
 	return [x, y]
-	"
+	
 	
 func _on_button_1_pressed():
+	# для рандомной расстановки кубов по полю раскоментировать 
 	var start_pos_p = start_pos
-	var diff = start_pos_p/7*2
-	var start_pos_e = a * diff / 2
-	#var locationscube: Array = [[0, 0]]
+	var diff = start_pos/6*2
+	var start_pos_e = (nam_dc-1) * diff / 2
+	var locationscube: Array = [[0, 0]] # для рандомной расстановки кубов по полю раскоментировать 
 	for i in range($DarkCubes.get_child_count()):
 		var Dices = $DarkCubes.get_child(i)
 		var cube = Dices.get_child(0)
-		#var xy = rndbynoove(locationscube)
-		var x = start_pos_e #xy[0]
-		var y = -750#xy[1]
-		#locationscube.append([x,y])
+		var xy = rndbynoove(locationscube) # для рандомной расстановки кубов по полю раскоментировать 
+		var x =  xy[0]#start_pos_e
+		var y = xy[1]#-750#
+		var m =  start_pos_e
+		var n = -750#
+		#locationscube.append([x,y])# для рандомной расстановки кубов по полю раскоментировать 
 		#print(locationscube)
-		cube.fall_dice(x, y)
+		cube.fall_dice(x,y,m,n,i)
 		start_pos_e = start_pos_e-diff
 	for i in range($WhiteCubes.get_child_count()):
 		var Dices = $WhiteCubes.get_child(i)
 		var cube = Dices.get_child(0)
-		#var xy = rndbynoove(locationscube)
-		var x = start_pos_p #xy[0]
-		var y = 750#xy[1]
+		var xy = rndbynoove(locationscube)
+		var x = xy[0]#start_pos_p #xy[0]
+		var y = xy[1]#750#
+		var m = start_pos_p
+		var n = 750#
 		#locationscube.append([x,y])
 		#print(locationscube)
-		cube.fall_dice(x, y)
+		cube.fall_dice(x,y,m,n,i)
 		start_pos_p = start_pos_p-diff
 	
 
@@ -91,7 +99,17 @@ func Dicenext(Dicenumber, nextDice):
 	
 	
 # запуск следующего куба по готовности
-func next1(x,y):
-	print("",x,y)
+func next_e(x,y):
+	print("выпал враг","-",x,"-",y)
+	pass
 	
+	
+func next_p(x,y):
+	print("выпал игрок","-",x,"-",y)
+	
+func next_clic_p(x,y):
+	print("нажат игрок","-",x,"-",y)
+	
+func next_clic_e(x,y):
+	print("нажат игрок","-",x,"-",y)
 	

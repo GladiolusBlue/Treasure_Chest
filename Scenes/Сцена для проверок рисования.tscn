@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckne7qj0iyqq"]
+[gd_scene load_steps=6 format=3 uid="uid://ckne7qj0iyqq"]
 
 [ext_resource type="Texture2D" uid="uid://do5ilv4n1lvab" path="res://Dice_sprites/test_sprite/Наработки.png" id="1_3r668"]
 [ext_resource type="Texture2D" uid="uid://b2vo7iwutiugn" path="res://Dice_sprites/test_sprite/загрузка.png" id="2_dcl0c"]
 [ext_resource type="Texture2D" uid="uid://tx7fju71tt3k" path="res://Dice_sprites/test_sprite/Light-sphere.png" id="3_h5805"]
+[ext_resource type="PackedScene" uid="uid://bddnesojb3xex" path="res://Scenes/main.tscn" id="4_05mg3"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_5i1p8"]
 diffuse_texture = ExtResource("1_3r668")
@@ -13,16 +14,19 @@ scale = Vector2(0.5, 0.5)
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.20286, 1.21115)
 texture = SubResource("CanvasTexture_5i1p8")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(42, 6)
-color = Color(1, 0.933333, 0.611765, 1)
-energy = 10.05
-blend_mode = 2
+scale = Vector2(2.40224, 1.32132)
+color = Color(1, 0.858824, 0.509804, 1)
+energy = 1.77
 texture = ExtResource("3_h5805")
-texture_scale = 3.25
-height = 100.0
+texture_scale = 3.73
+height = 20.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.294118, 0.317647, 0.494118, 1)
+color = Color(0.419608, 0.372549, 0.443137, 1)
+
+[node name="Node2D" parent="." instance=ExtResource("4_05mg3")]
+scale = Vector2(0.7, 0.7)

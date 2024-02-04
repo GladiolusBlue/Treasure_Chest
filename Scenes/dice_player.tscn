@@ -22,14 +22,18 @@ var counter = 0
 var cube_face = 0 #номер изабражения грани кубика для передачи дальше
 var gotov = 0
 signal cubu_gotov
+signal cubu_clic
 var scale_vozvrat = 1
-var num_revolut = 12 #количество переворотов граней куба
+var num_revolut = 6 #количество переворотов граней куба
 var time_flip = 0.13#  время переворота грани в секундах
 var name_face = \"player\"
 var scale_minus = 1-(0.5/num_revolut) #значение на сколько уменьшать масштаб
 var x = 0 # приём значения о конечном местоположении
 var y = 0
-
+var rot = 0
+var start_x = 0
+var start_y = 0
+var num_dice = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -52,8 +56,13 @@ func scale_vozv(scale_x):
 	scale_vozvrat = scale_x*scale_vozvrat
 	
 	
-func fall_dice(a,b): #падение кубика
-	Velocity = Vector2.ZERO #задание стартового местоположения вцентре
+func fall_dice(a,b,m,n,i): #падение кубика
+	rot = 0
+	start_x = m
+	start_y = n
+	num_dice = i
+	Velocity = Vector2.ZERO
+	#задание стартового местоположения вцентре
 	set_position(Velocity) # запись местоположения 
 	x = a # приём значения о конечном местоположении
 	y = b
@@ -80,26 +89,26 @@ func fall_dice(a,b): #падение кубика
 func busting_the_dice(i):
 	# показ картинок граней
 	# выбор соответствующей картинки
-	var numb = i
+	var numb = i # номер картинки
 	var random_number = numb%6
 	if random_number == 1:
 		image = image1
-		name_face = \"Chest\"
+		name_face = \"Cleric\"
 	elif random_number == 2:
 		image = image2
-		name_face = \"Dragon\"
+		name_face = \"Guardian\"
 	elif random_number == 3:
 		image = image5
-		name_face = \"Skeleton\"
+		name_face = \"Thief\"
 	elif random_number == 4:
 		image = image6
-		name_face = \"Slime\"
+		name_face = \"Warrior\"
 	elif random_number == 5:
 		image = image3
-		name_face = \"Goblin\"
+		name_face = \"Magician\"
 	elif random_number == 0:
 		image = image4
-		name_face = \"Potion\"
+		name_face = \"Scroll\"
 	else:
 		print(\"error\",random_number,\" \",numb)
 	# установка выбранной картинки видимой
@@ -136,7 +145,48 @@ func _on_timer_busting_timeout():
 		$Timer_busting.stop()
 		# передача сигнала о готовности куба и его значение
 		emit_signal(\"cubu_gotov\",str(cube_face),name_face)
-		print(Velocity)
+		to_start_pos()
+		#print(Velocity)
+		
+		
+func to_start_pos():
+	#Velocity = Vector2.ZERO #задание стартового местоположения вцентре
+	x = start_x - x# приём значения о конечном местоположении
+	y = start_y - y
+	
+	set_position(Velocity) # запись местоположения 
+	#print(x,y)
+	# время задержки для показывания картинки при перелистывании
+	rot = 1
+	$Timer_busting2.start(time_flip)
+	pass
+
+
+func _on_timer_busting_2_timeout():
+	if counter < num_revolut:
+		counter += 1
+		Velocity.x += x/num_revolut #изменение координат для местоположения
+		Velocity.y += y/num_revolut
+		set_position(Velocity)
+		#уменьшение масштаба картинки
+		#busting_the_dice(count)
+	else :
+		# остановка таймера и переборки картинок
+		gotov = 1
+		counter = 0
+		#set_position(Velocity)
+		$Timer_busting2.stop()
+		# передача сигнала о готовности куба и его значение
+		#emit_signal(\"cubu_gotov\",str(cube_face),name_face)
+		#to_start_pos(start_x,start_y)
+		#print(Velocity)
+	pass # Replace with function body.
+
+
+func _on_button_pressed():
+	
+	emit_signal(\"cubu_clic\",num_dice,name_face)
+	pass # Replace with function body.
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_autnt"]
@@ -153,8 +203,12 @@ script = SubResource("GDScript_f60cv")
 process_mode = 1
 wait_time = 0.2
 
+[node name="Timer_busting2" type="Timer" parent="Dice_main"]
+process_mode = 1
+wait_time = 0.1
+
 [node name="Button" type="Button" parent="Dice_main"]
-visible = false
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -178,3 +232,5 @@ can_sleep = false
 shape = SubResource("RectangleShape2D_autnt")
 
 [connection signal="timeout" from="Dice_main/Timer_busting" to="Dice_main" method="_on_timer_busting_timeout"]
+[connection signal="timeout" from="Dice_main/Timer_busting2" to="Dice_main" method="_on_timer_busting_2_timeout"]
+[connection signal="pressed" from="Dice_main/Button" to="Dice_main" method="_on_button_pressed"]

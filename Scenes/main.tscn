@@ -9,7 +9,7 @@
 script = ExtResource("1_h2vby")
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2(-1338.03, -5.6338)
+position = Vector2(-1000, 0)
 metadata/_edit_group_ = true
 
 [node name="Button1" type="Button" parent="Node2D"]
@@ -60,6 +60,18 @@ scale = Vector2(0.355, 0.355)
 scale = Vector2(0.355, 0.355)
 
 [node name="Dice_e3" parent="DarkCubes" instance=ExtResource("3_0tr2e")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_e4" parent="DarkCubes" instance=ExtResource("3_0tr2e")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_e5" parent="DarkCubes" instance=ExtResource("3_0tr2e")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_e6" parent="DarkCubes" instance=ExtResource("3_0tr2e")]
+scale = Vector2(0.355, 0.355)
+
+[node name="Dice_e7" parent="DarkCubes" instance=ExtResource("3_0tr2e")]
 scale = Vector2(0.355, 0.355)
 
 [connection signal="pressed" from="Node2D/Button1" to="." method="_on_button_1_pressed"]

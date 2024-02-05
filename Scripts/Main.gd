@@ -4,8 +4,8 @@ extends Node
 #var cube = 0
 var nam_dc = 0 # количество черных кубиков
 #var b = 0
-#var   start_pos_e =-700
-const  start_pos = -700 # половина ширины расстановки кубиков игрока
+#var  start_pos_e =-700
+const  start_pos = -600 # половина ширины расстановки кубиков игрока
 #var Dicename = []
 #var name_dice = 0
 #var o = "p1"
@@ -62,19 +62,19 @@ func rndbynoove(locatarr):
 	
 	
 func _on_button_1_pressed():
-	# для рандомной расстановки кубов по полю раскоментировать 
+	
 	var start_pos_p = start_pos
 	var diff = start_pos/6*2
 	var start_pos_e = (nam_dc-1) * diff / 2
-	var locationscube: Array = [[0, 0]] # для рандомной расстановки кубов по полю раскоментировать 
+	var locationscube: Array = [[0, 0]] 
 	for i in range($DarkCubes.get_child_count()):
 		var Dices = $DarkCubes.get_child(i)
 		var cube = Dices.get_child(0)
-		var xy = rndbynoove(locationscube) # для рандомной расстановки кубов по полю раскоментировать 
-		var x =  xy[0]#start_pos_e
-		var y = xy[1]#-750#
-		var m =  start_pos_e
-		var n = -750#
+		var xy = rndbynoove(locationscube) 
+		var x = xy[0]
+		var y = xy[1]
+		var n =  start_pos_e
+		var m = 1350#
 		#locationscube.append([x,y])# для рандомной расстановки кубов по полю раскоментировать 
 		#print(locationscube)
 		cube.fall_dice(x,y,m,n,i)
@@ -83,10 +83,10 @@ func _on_button_1_pressed():
 		var Dices = $WhiteCubes.get_child(i)
 		var cube = Dices.get_child(0)
 		var xy = rndbynoove(locationscube)
-		var x = xy[0]#start_pos_p #xy[0]
-		var y = xy[1]#750#
-		var m = start_pos_p
-		var n = 750#
+		var x = xy[0]
+		var y = xy[1]
+		var n = start_pos_p
+		var m = -1350
 		#locationscube.append([x,y])
 		#print(locationscube)
 		cube.fall_dice(x,y,m,n,i)

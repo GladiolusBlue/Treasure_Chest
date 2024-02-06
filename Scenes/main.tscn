@@ -8,19 +8,54 @@
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_h2vby")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="start level" type="Node2D" parent="."]
 position = Vector2(-1000, 0)
 metadata/_edit_group_ = true
 
-[node name="Button1" type="Button" parent="Node2D"]
-self_modulate = Color(1, 1, 1, 0)
-offset_left = -93.0
-offset_top = -85.0
-offset_right = 94.0
-offset_bottom = 98.0
+[node name="Button1" type="Button" parent="start level"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -75.5
+offset_top = -27.0
+offset_right = 74.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3.5, 3.5)
+pivot_offset = Vector2(75, 30)
 size_flags_horizontal = 4
+text = "НАЧАТЬ 
+УРОВЕНЬ"
+flat = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/Button1"]
+[node name="Sprite2D" type="Sprite2D" parent="start level/Button1"]
+visible = false
+position = Vector2(95.7746, 94.3662)
+scale = Vector2(1.45246, 1.47447)
+texture = ExtResource("2_yddrg")
+
+[node name="leave level" type="Node2D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="leave level" type="Button" parent="leave level"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 800.0
+offset_right = 950.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3.5, 3.5)
+pivot_offset = Vector2(75, 30)
+size_flags_horizontal = 4
+text = "Покинуть 
+подземелье"
+flat = true
+
+[node name="Sprite2D" type="Sprite2D" parent="leave level/leave level"]
+visible = false
 position = Vector2(95.7746, 94.3662)
 scale = Vector2(1.45246, 1.47447)
 texture = ExtResource("2_yddrg")
@@ -74,4 +109,5 @@ scale = Vector2(0.355, 0.355)
 [node name="Dice_e7" parent="DarkCubes" instance=ExtResource("3_0tr2e")]
 scale = Vector2(0.355, 0.355)
 
-[connection signal="pressed" from="Node2D/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="start level/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="leave level/leave level" to="." method="_on_leave_level_pressed"]

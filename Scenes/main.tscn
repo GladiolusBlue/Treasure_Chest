@@ -35,10 +35,10 @@ position = Vector2(95.7746, 94.3662)
 scale = Vector2(1.45246, 1.47447)
 texture = ExtResource("2_yddrg")
 
-[node name="leave level" type="Node2D" parent="."]
+[node name="leave_level" type="Node2D" parent="."]
 metadata/_edit_group_ = true
 
-[node name="leave level" type="Button" parent="leave level"]
+[node name="leave level" type="Button" parent="leave_level"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -54,7 +54,32 @@ text = "Покинуть
 подземелье"
 flat = true
 
-[node name="Sprite2D" type="Sprite2D" parent="leave level/leave level"]
+[node name="Sprite2D" type="Sprite2D" parent="leave_level/leave level"]
+visible = false
+position = Vector2(95.7746, 94.3662)
+scale = Vector2(1.45246, 1.47447)
+texture = ExtResource("2_yddrg")
+
+[node name="battle" type="Node2D" parent="."]
+position = Vector2(0, -500)
+metadata/_edit_group_ = true
+
+[node name="battle" type="Button" parent="battle"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6, 6)
+pivot_offset = Vector2(25, 25)
+size_flags_horizontal = 4
+text = "Бой"
+flat = true
+text_overrun_behavior = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="battle/battle"]
 visible = false
 position = Vector2(95.7746, 94.3662)
 scale = Vector2(1.45246, 1.47447)
@@ -110,4 +135,5 @@ scale = Vector2(0.355, 0.355)
 scale = Vector2(0.355, 0.355)
 
 [connection signal="pressed" from="start level/Button1" to="." method="_on_button_1_pressed"]
-[connection signal="pressed" from="leave level/leave level" to="." method="_on_leave_level_pressed"]
+[connection signal="pressed" from="leave_level/leave level" to="." method="_on_leave_level_pressed"]
+[connection signal="pressed" from="battle/battle" to="." method="_on_battle_pressed"]

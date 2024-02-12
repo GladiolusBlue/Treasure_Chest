@@ -1,0 +1,180 @@
+[gd_scene load_steps=19 format=3 uid="uid://dttqlutxiueyh"]
+
+[ext_resource type="Texture2D" uid="uid://ba6snngk6wnnk" path="res://Dice_sprites/test_sprite/table_diffuse.png" id="1_1qasc"]
+[ext_resource type="Texture2D" uid="uid://d2p4o7kyja21l" path="res://Dice_sprites/test_sprite/table_normal.png" id="2_1p2t4"]
+[ext_resource type="Texture2D" uid="uid://dhnco1v6rxyw5" path="res://Dice_sprites/test_sprite/table_spectrul.png" id="3_2in5l"]
+[ext_resource type="Texture2D" uid="uid://tx7fju71tt3k" path="res://Dice_sprites/test_sprite/Light-sphere.png" id="3_ml5jf"]
+[ext_resource type="Texture2D" path="res://Dice_sprites/Enemy/Chest.png" id="5_vfkhj"]
+[ext_resource type="Texture2D" uid="uid://2w0yiopsk8ds" path="res://Dice_sprites/test_sprite/загрузка (1).png" id="6_8wy0o"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_2hby6"]
+diffuse_texture = ExtResource("1_1qasc")
+normal_texture = ExtResource("2_1p2t4")
+specular_texture = ExtResource("3_2in5l")
+specular_color = Color(1, 0.960784, 0.847059, 1)
+specular_shininess = 0.38
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_668mf"]
+polygon = PackedVector2Array(-254.761, -45.8888, -27.8211, 110.544, -25.9199, 55.7957, -46.1515, 1.42944, -99.2767, -53.0013, -273.692, -189.783, -512.157, -390.928, -688.201, -658.62, -882.272, -523.382, -732.188, -458.607, -697.657, -363.688, -638.253, -348.584, -553.941, -338.021, -484.575, -240.541, -446.246, -237.091, -390.52, -160.25, -345.992, -109.15)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_hnumv"]
+diffuse_texture = ExtResource("5_vfkhj")
+normal_texture = ExtResource("6_8wy0o")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s1qdi"]
+closed = false
+polygon = PackedVector2Array(-56.0001, -7.99997, 1.99994, -34, 47.9999, 26, -24.0001, 51.0001)
+
+[sub_resource type="Animation" id="Animation_um0s5"]
+resource_name = "fire_]light"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0.7, -0.25, 0, 0.2, -3.51, 0.5, -0.25, 0, 0.25, 0, 1, -0.2, 4.65, 0.25, 0, 0.68, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 0.84, -0.25, 0, 0.25, 0, 0.67, -0.25, 0, 0.25, 0, 0.4, -0.25, 0, 0.25, 0, 1.17, -0.138797, -2.17, 0.25, 0, 0.66, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 2.5, -0.25, 0, 0.25, 0, 2.69, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 1.68, -0.25, 0, 0.25, 0, 1.17, -0.25, 0, 0.25, 0, 1.68, -0.25, 0, 0.25, 0, 0.67, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 0.67, -0.25, 0, 0.25, 0, 0.84, -0.25, 0, 0.25, 0, 1.85, -0.25, 0, 0.25, 0, 0.84, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(-0.025, 0.175, 0.375, 0.675, 0.775, 0.975, 1.375, 1.475, 1.9, 2, 2.1, 2.6, 2.9, 3.2, 3.3, 3.4, 3.6, 4.1, 4.2, 4.3, 4.5, 4.6, 4.8, 4.9, 4.975)
+}
+
+[sub_resource type="Animation" id="Animation_1sokp"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hqbmr"]
+_data = {
+"RESET": SubResource("Animation_1sokp"),
+"fire_]light": SubResource("Animation_um0s5")
+}
+
+[sub_resource type="Gradient" id="Gradient_yf4ov"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bqcce"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_euh42"]
+width = 10
+height = 10
+color_ramp = SubResource("Gradient_yf4ov")
+noise = SubResource("FastNoiseLite_bqcce")
+
+[sub_resource type="Environment" id="Environment_ca7gn"]
+background_mode = 3
+background_energy_multiplier = 0.0
+background_canvas_max_layer = 2
+tonemap_mode = 2
+tonemap_white = 5.0
+sdfgi_bounce_feedback = 0.85
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 3.43
+glow_strength = 0.37
+glow_bloom = 0.51
+glow_hdr_threshold = 1.66
+glow_hdr_luminance_cap = 256.0
+glow_map_strength = 0.71
+glow_map = SubResource("NoiseTexture2D_euh42")
+fog_sun_scatter = 0.27
+fog_density = 0.0
+fog_height = -337.01
+volumetric_fog_density = 0.2146
+volumetric_fog_emission_energy = 7.15
+adjustment_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_vphs2"]
+
+[node name="Table" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("CanvasTexture_2hby6")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(2774, -561)
+rotation = -3.15946
+scale = Vector2(9.17454, 6.22155)
+color = Color(1, 0.8, 0.470588, 1)
+energy = 0.0
+shadow_filter = 1
+shadow_filter_smooth = 2.4
+texture = ExtResource("3_ml5jf")
+offset = Vector2(300, -59)
+
+[node name="PointLight2D3" type="PointLight2D" parent="."]
+position = Vector2(1817, -1828)
+rotation = -3.6165
+scale = Vector2(5.84197, 6.22155)
+color = Color(1, 0.745098, 0.447059, 1)
+energy = 2.19
+shadow_enabled = true
+shadow_color = Color(0.0392157, 0.0392157, 0.0588235, 1)
+shadow_filter = 2
+texture = ExtResource("3_ml5jf")
+offset = Vector2(300, -160.61)
+height = 280.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(4, -555)
+scale = Vector2(4.99333, 3.29126)
+color = Color(0.878431, 0.0588235, 0, 1)
+energy = 6.73
+shadow_color = Color(0, 0, 0, 0.827451)
+texture = ExtResource("3_ml5jf")
+height = 50.0
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+modulate = Color(1, 1, 1, 0.137255)
+self_modulate = Color(1, 1, 1, 0.32549)
+clip_children = 2
+position = Vector2(260, -275)
+rotation = 3.48061
+scale = Vector2(1, 1)
+occluder = SubResource("OccluderPolygon2D_668mf")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(606.574, -295.306)
+rotation = -0.22348
+scale = Vector2(0.19384, 0.241556)
+skew = -0.253073
+texture = SubResource("CanvasTexture_hnumv")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="Sprite2D2"]
+modulate = Color(1, 1, 1, 0.203922)
+self_modulate = Color(1, 1, 1, 0.32549)
+clip_children = 2
+position = Vector2(-23.1064, 56.0303)
+rotation = 0.178739
+scale = Vector2(4.79439, 5.50981)
+skew = 0.212404
+occluder = SubResource("OccluderPolygon2D_s1qdi")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.6, 0.6)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_default_blend_time = 874.43
+speed_scale = 0.6
+method_call_mode = 1
+libraries = {
+"": SubResource("AnimationLibrary_hqbmr")
+}
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.262745, 0.227451, 0.6, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ca7gn")
+camera_attributes = SubResource("CameraAttributesPractical_vphs2")
